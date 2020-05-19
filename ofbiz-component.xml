@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ofbiz-component name="drools"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/ofbiz-component.xsd">
+    <!-- define resource loaders; most common is to use the component resource loader -->
+    <resource-loader name="main" type="component"/>
+
+    <classpath type="dir" location="lib"/>
+    <classpath type="dir" location="config"/>
+
+    <!-- entity resources: model(s), eca(s), group, and data definitions -->
+    <entity-resource type="model" reader-name="main" loader="main" location="entitydef/entitymodel_userrole.xml"/>
+    <entity-resource type="data" reader-name="seed" loader="main" location="data/DroolsSeedData.xml"/>
+    <entity-resource type="data" reader-name="demo" loader="main" location="data/DroolsDemoData.xml"/>
+
+    <!-- service resources: model(s), eca(s) and group definitions -->
+    <service-resource type="model" loader="main" location="servicedef/services.xml"/>
+
+    <!-- web applications; will be mounted when using the embedded container -->
+    <webapp name="kie-server"
+        title="Kie Execution Server"
+        server="default-server"
+        location="webapp/kie-server-7.11.0.Final"
+        mount-point="/kie-server"
+        app-bar-display="false"/>
+
+    <webapp name="drools-wb"
+        title="Drools Workbench"
+        server="default-server"
+        location="webapp/drools-wb-7.11.0.Final"
+        mount-point="/drools-wb"
+        app-bar-display="false"/>
+
+</ofbiz-component>

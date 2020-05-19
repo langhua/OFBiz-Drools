@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Specify the refresh internal in seconds. -->
+<Configuration monitorInterval="60">
+	
+    <Appenders>
+        <Console name="stdout" target="SYSTEM_OUT">
+            <PatternLayout pattern="%date{DEFAULT} |%-20.20thread |%-30.30logger{1}|%level{length=1}|%-4L| %message%n"/>
+        </Console>
+
+        <RollingFile name="droolslogfile" fileName="runtime/logs/drools/drools.log" append="true"
+                     filePattern="runtime/logs/drools/drools-%d{yyyy-MM-dd-HH}-%i.log">
+            <PatternLayout pattern="%date{DEFAULT} |%-20.20thread |%-30.30logger{1}|%level{length=1}|%-4L| %message%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <AsyncLogger name="org.drools" level="info" additivity="false" includeLocation="true">
+            <AppenderRef ref="droolslogfile"/>
+        </AsyncLogger>
+        <AsyncLogger name="org.dashbuilder" level="info" additivity="false" includeLocation="true">
+            <AppenderRef ref="droolslogfile"/>
+        </AsyncLogger>
+        <AsyncLogger name="org.jbpm" level="info" additivity="false" includeLocation="true">
+            <AppenderRef ref="droolslogfile"/>
+        </AsyncLogger>
+        <AsyncLogger name="org.kie" level="info" additivity="false" includeLocation="true">
+            <AppenderRef ref="droolslogfile"/>
+        </AsyncLogger>
+        <AsyncLogger name="org.uberfire" level="info" additivity="false" includeLocation="true">
+            <AppenderRef ref="droolslogfile"/>
+        </AsyncLogger>
+        <AsyncLogger name="org.jboss" level="info" additivity="false" includeLocation="true">
+            <AppenderRef ref="droolslogfile"/>
+        </AsyncLogger>
+        <AsyncLogger name="org.langhua.ofbiz.webapp.jarscan.DroolsJarScanFilter" level="info" additivity="false" includeLocation="true">
+            <AppenderRef ref="droolslogfile"/>
+        </AsyncLogger>
+        <AsyncLogger name="org.langhua.ofbiz.webapp.jarscan.DroolsJarScanner" level="info" additivity="false" includeLocation="true">
+            <AppenderRef ref="droolslogfile"/>
+        </AsyncLogger>
+        <AsyncLogger name="org.springframework" level="info" additivity="false" includeLocation="true">
+            <AppenderRef ref="droolslogfile"/>
+        </AsyncLogger>
+        <AsyncLogger name="com.arjuna" level="info" additivity="false" includeLocation="true">
+            <AppenderRef ref="droolslogfile"/>
+        </AsyncLogger>
+    </Loggers>
+</Configuration>

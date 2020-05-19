@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Implementation-Title: KIE :: Execution Server :: Wars :: Distribution 
+ Wars
+Implementation-Version: 7.11.0.Final
+Java-Version: 1.8.0_131
+Built-By: jenkins
+Scm-Connection: scm:git:https://github.com:kiegroup/droolsjbpm-integra
+ tion.git/kie-server-parent/kie-server-wars/kie-server
+Specification-Vendor: JBoss by Red Hat
+Os-Arch: amd64
+Specification-Title: KIE :: Execution Server :: Wars :: Distribution W
+ ars
+Implementation-Vendor-Id: org.kie.server
+Java-Vendor: Oracle Corporation
+Os-Name: Linux
+Scm-Url: https://github.com/kiegroup/droolsjbpm-integration/kie-server
+ -parent/kie-server-wars/kie-server
+Implementation-Vendor: JBoss by Red Hat
+Os-Version: 3.10.0-514.el7.x86_64
+DisableIBMJAXWSEngine: true
+Scm-Revision: 17c48b4e9a11b13a52f80b8a972a45efac6b919c
+Created-By: Apache Maven 3.3.9
+Build-Jdk: 1.8.0_131
+Specification-Version: 7.11
+Ignore-Scanning-Archives: cxf-api-3.2.2.jar,cxf-rt-bindings-soap-3.2.2
+ .jar,cxf-rt-bindings-xml-3.2.2.jar,cxf-rt-core-3.2.2.jar,cxf-rt-datab
+ inding-jaxb-3.2.2.jar,cxf-rt-frontend-jaxws-3.2.2.jar,cxf-rt-frontend
+ -simple-3.2.2.jar,cxf-rt-transports-http-3.2.2.jar,cxf-rt-ws-addr-3.2
+ .2.jar,cxf-rt-ws-policy-3.2.2.jar
+Implementation-URL: http://www.kiegroup.org/droolsjbpm-integration/kie
+ -server-parent/kie-server-wars/kie-server
+

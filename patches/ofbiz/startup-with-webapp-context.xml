@@ -1,0 +1,47 @@
+### Eclipse Workspace Patch 1.0
+Index: framework/catalina/src/main/java/org/apache/ofbiz/catalina/container/CatalinaContainer.java
+===================================================================
+--- framework/catalina/src/main/java/org/apache/ofbiz/catalina/container/CatalinaContainer.java (revision 1877905)
++++ framework/catalina/src/main/java/org/apache/ofbiz/catalina/container/CatalinaContainer.java (working copy)
+@@ -49,6 +49,7 @@
+ import org.apache.catalina.ha.tcp.ReplicationValve;
+ import org.apache.catalina.ha.tcp.SimpleTcpCluster;
+ import org.apache.catalina.loader.WebappLoader;
++import org.apache.catalina.startup.Constants;
+ import org.apache.catalina.startup.ContextConfig;
+ import org.apache.catalina.startup.Tomcat;
+ import org.apache.catalina.tribes.group.GroupChannel;
+@@ -74,6 +75,7 @@
+ import org.apache.ofbiz.base.start.Start;
+ import org.apache.ofbiz.base.start.StartupCommand;
+ import org.apache.ofbiz.base.util.Debug;
++import org.apache.ofbiz.base.util.FileUtil;
+ import org.apache.ofbiz.base.util.SSLUtil;
+ import org.apache.ofbiz.base.util.UtilValidate;
+ import org.apache.ofbiz.base.util.UtilXml;
+@@ -543,7 +545,25 @@
+         context.setDocBase(location);
+         context.setPath(mount);
+         context.addLifecycleListener(new ContextConfig());
++
++        String contextXmlFilePath = new StringBuilder().append("file:///").append(location).append("/").append(Constants.ApplicationContextXml).toString();
++        URL contextXmlUrl = null;
++        try {
++            contextXmlUrl = FlexibleLocation.resolveLocation(contextXmlFilePath);
++            contextXmlFilePath = new StringBuilder().append(location).append("/").append(Constants.ApplicationContextXml).toString();
++            File contextXmlFile = FileUtil.getFile(contextXmlFilePath);
++            if(contextXmlFile.exists() && contextXmlFile.isFile()) { 
++                Debug.logInfo(contextXmlFilePath + " found and will be loaded.", module);
++                context.setConfigFile(contextXmlUrl);
++            } else {
++                // Debug.logInfo(contextXmlFilePath + " not found or not a file.", module);
++            }
++        } catch (MalformedURLException e) {
++            Debug.logInfo(contextXmlFilePath+ " not found.", module);
++        }
++        
+         Tomcat.initWebappDefaults(context);
++
+         // configure persistent sessions
+         // important: the call to context.setManager(...) must be done after Tomcat.initWebappDefaults(...)
+         Property clusterProp = clusterConfig.get(engine.getName());

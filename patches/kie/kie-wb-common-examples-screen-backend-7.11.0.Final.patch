@@ -1,0 +1,16 @@
+diff --git a/kie-wb-common-screens/kie-wb-common-examples-screen/kie-wb-common-examples-screen-backend/src/main/java/org/kie/workbench/common/screens/examples/backend/server/ExamplesServiceImpl.java b/kie-wb-common-screens/kie-wb-common-examples-screen/kie-wb-common-examples-screen-backend/src/main/java/org/kie/workbench/common/screens/examples/backend/server/ExamplesServiceImpl.java
+index 500c533..3fbf7b1 100644
+--- a/kie-wb-common-screens/kie-wb-common-examples-screen/kie-wb-common-examples-screen-backend/src/main/java/org/kie/workbench/common/screens/examples/backend/server/ExamplesServiceImpl.java
++++ b/kie-wb-common-screens/kie-wb-common-examples-screen/kie-wb-common-examples-screen-backend/src/main/java/org/kie/workbench/common/screens/examples/backend/server/ExamplesServiceImpl.java
+@@ -121,7 +121,10 @@
+     @PostConstruct
+     public void initPlaygroundRepository() {
+         try {
+-            String userDir = System.getProperty("user.dir");
++            String userDir = System.getProperty("org.kie.wb.common.examples.dir");
++            if (userDir == null) {
++                userDir = System.getProperty("user.dir");
++            }
+ 
+             File playgroundDirectory = new File(userDir,
+                                                 ".kie-wb-playground");

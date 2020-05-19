@@ -1,0 +1,17 @@
+diff --git a/kie-server-parent/kie-server-services/kie-server-services-common/src/main/java/org/kie/server/services/impl/controller/DefaultRestControllerImpl.java b/kie-server-parent/kie-server-services/kie-server-services-common/src/main/java/org/kie/server/services/impl/controller/DefaultRestControllerImpl.java
+index 02ed6b6..129a9a8 100644
+--- a/kie-server-parent/kie-server-services/kie-server-services-common/src/main/java/org/kie/server/services/impl/controller/DefaultRestControllerImpl.java
++++ b/kie-server-parent/kie-server-services/kie-server-services-common/src/main/java/org/kie/server/services/impl/controller/DefaultRestControllerImpl.java
+@@ -182,7 +182,11 @@
+     }
+     
+     public KieServerSetup connectToSingleController(KieServerInfo serverInfo, KieServerConfig config, String controllerUrl) {
+-        String connectAndSyncUrl = controllerUrl + "/server/" + KieServerEnvironment.getServerId();
++       String serverId = KieServerEnvironment.getServerId();
++       if (serverId.contains("/")) {
++           serverId = serverId.substring(serverId.lastIndexOf("/") + 1);
++       }
++        String connectAndSyncUrl = controllerUrl + "/server/" + serverId;
+ 
+         String userName = config.getConfigItemValue(KieServerConstants.CFG_KIE_CONTROLLER_USER, "kieserver");
+         String password = loadControllerPassword(config);

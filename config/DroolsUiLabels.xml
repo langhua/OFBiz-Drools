@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/ofbiz-properties.xsd">
+    <property key="OFBizUserDatabase.nullGroup">
+        <value xml:lang="en">Null or zero length group name specified. The group will be ignored.</value>
+    </property>
+    <property key="OFBizUserDatabase.nullRole">
+        <value xml:lang="en">Null or zero length role name specified. The role will be ignored.</value>
+    </property>
+    <property key="OFBizUserDatabase.nullUser">
+        <value xml:lang="en">Null or zero length user name specified. The user will be ignored.</value>
+    </property>
+</resource>

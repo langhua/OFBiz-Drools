@@ -1,0 +1,1 @@
+$wnd.org_kie_workbench_drools_KIEDroolsWebapp.runAsyncCallback1('W2n(36448,1,{38388:1});_.Hm=function H0B(){$NB(this.d,this.c)};dPab(O$b)(1);\n//# sourceURL=org.kie.workbench.drools.KIEDroolsWebapp-1.js\n')

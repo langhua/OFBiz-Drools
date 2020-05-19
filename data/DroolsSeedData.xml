@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+    <RoleType description="OFBiz Drools Permission Root Role Type" roleTypeId="DROOLS_PERMROOT" hasTable="N"/>
+
+    <RoleType roleTypeId="DROOLS_ADMIN" parentTypeId="DROOLS_PERMROOT" hasTable="N" description="admin"/>
+    <RoleType roleTypeId="DROOLS_ANALYST" parentTypeId="DROOLS_PERMROOT" hasTable="N" description="analyst"/>
+    <RoleType roleTypeId="DROOLS_RESTALL" parentTypeId="DROOLS_PERMROOT" hasTable="N" description="rest-all"/>
+    <RoleType roleTypeId="DROOLS_KIESERVER" parentTypeId="DROOLS_PERMROOT" hasTable="N" description="kie-server"/>
+
+    <SecurityGroup groupId="DROOLS_ADMIN" groupName="admin"  description="Drools Admin"/>
+    <SecurityGroup groupId="DROOLS_ANALYST" groupName="analyst"  description="Drools Analyst"/>
+    <SecurityGroup groupId="DROOLS_RESTALL" groupName="rest-all"  description="Drools Rest All"/>
+    <SecurityGroup groupId="DROOLS_KIESERVER" groupName="kie-server"  description="Drools Kie Server"/>
+
+    <SecurityGroupRoleTypeRelation securityGroupId="DROOLS_ADMIN" roleTypeId="DROOLS_ADMIN" fromDate="2001-05-13 12:00:00.0"/>
+    <SecurityGroupRoleTypeRelation securityGroupId="DROOLS_ANALYST" roleTypeId="DROOLS_ANALYST" fromDate="2001-05-13 12:00:00.0"/>
+    <SecurityGroupRoleTypeRelation securityGroupId="DROOLS_RESTALL" roleTypeId="DROOLS_RESTALL" fromDate="2001-05-13 12:00:00.0"/>
+    <SecurityGroupRoleTypeRelation securityGroupId="DROOLS_KIESERVER" roleTypeId="DROOLS_KIESERVER" fromDate="2001-05-13 12:00:00.0"/>
+
+    <Party partyId="DROOLS_ORGROOT" description="Drools Group Root" statusId="PARTY_ENABLED"/>
+    <PartyGroup partyId="DROOLS_ORGROOT" groupName="Drools Group Root"/>
+    <PartyRole partyId="DROOLS_ORGROOT" roleTypeId="_NA_"/>
+
+    <Party partyId="droolsrest" partyTypeId="PERSON" statusId="PARTY_ENABLED"/>
+    <UserLogin userLoginId="droolsrest" partyId="droolsrest" currentPassword="{SHA}ae982ceae1a1e670397936d2984e27f288de1731"/>
+    <UserLoginSecurityGroup groupId="DROOLS_ADMIN" userLoginId="droolsrest" fromDate="2001-01-01 12:00:00.0"/>
+    <UserLoginSecurityGroup groupId="DROOLS_RESTALL" userLoginId="droolsrest" fromDate="2001-01-01 12:00:00.0"/>
+
+    <Party partyId="kieserver" partyTypeId="PERSON" statusId="PARTY_ENABLED"/>
+    <UserLogin userLoginId="kieserver" partyId="kieserver" currentPassword="{SHA}ae982ceae1a1e670397936d2984e27f288de1731"/>
+    <UserLoginSecurityGroup groupId="DROOLS_ADMIN" userLoginId="kieserver" fromDate="2001-01-01 12:00:00.0"/>
+    <UserLoginSecurityGroup groupId="DROOLS_KIESERVER" userLoginId="kieserver" fromDate="2001-01-01 12:00:00.0"/>
+
+    <UserLoginSecurityGroup groupId="DROOLS_ADMIN" userLoginId="admin" fromDate="2001-01-01 12:00:00.0"/>
+</entity-engine-xml>

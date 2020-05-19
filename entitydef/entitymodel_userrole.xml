@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entity of Drools Component</title>
+    
+    <entity entity-name="SecurityGroupRoleTypeRelation"
+            package-name="org.apache.ofbiz.security.securitygroup"
+            title="Security group and role type relation">
+        <field name="securityGroupId" type="id"/>
+        <field name="roleTypeId" type="id"/>
+        <field name="fromDate" type="date-time"/>
+        <field name="thruDate" type="date-time"/>
+        <field name="relationName" type="value"/>
+        <field name="description" type="description"/>
+        <prim-key field="securityGroupId"/>
+        <prim-key field="roleTypeId"/>
+        <prim-key field="fromDate"/>
+        <relation type="one" fk-name="SECUGRP_RT_SGID" rel-entity-name="SecurityGroup">
+            <key-map field-name="securityGroupId" rel-field-name="groupId"/>
+        </relation>
+        <relation type="one" fk-name="SECUGRP_RT_RTID" rel-entity-name="RoleType">
+            <key-map field-name="roleTypeId"/>
+        </relation>
+    </entity>
+
+    <extend-entity entity-name="RoleType">
+        <field name="roleTypeId" type="id-long"></field>
+        <field name="parentTypeId" type="id-long"></field>
+    </extend-entity>
+    
+    <view-entity entity-name="DroolsRoleTypeIn4Levels"
+                 package-name="org.apache.ofbiz.drools.party"
+                 title="Drools Role View in 4 levels">
+        <member-entity entity-alias="RT1" entity-name="RoleType" />
+        <member-entity entity-alias="RT2" entity-name="RoleType" />
+        <member-entity entity-alias="RT3" entity-name="RoleType" />
+        <member-entity entity-alias="RT4" entity-name="RoleType" />
+        <alias entity-alias="RT1" name="topRoleTypeId" field="roleTypeId" />
+        <alias entity-alias="RT1" name="topDescription" field="description" />
+        <alias entity-alias="RT1" name="topHasTable" field="hasTable" />
+        <alias entity-alias="RT2" name="midRoleTypeId" field="roleTypeId" />
+        <alias entity-alias="RT2" name="midDescription" field="description" />
+        <alias entity-alias="RT2" name="midHasTable" field="hasTable" />
+        <alias entity-alias="RT3" name="lowRoleTypeId" field="roleTypeId" />
+        <alias entity-alias="RT3" name="lowDescription" field="description" />
+        <alias entity-alias="RT3" name="lowHasTable" field="hasTable" />
+        <alias entity-alias="RT4" name="bottomRoleTypeId" field="roleTypeId" />
+        <alias entity-alias="RT4" name="bottomDescription" field="description" />
+        <alias entity-alias="RT4" name="bottomHasTable" field="hasTable" />
+        <view-link entity-alias="RT1" rel-entity-alias="RT2">
+            <key-map field-name="roleTypeId" rel-field-name="parentTypeId"/>
+            <entity-condition>
+                <condition-expr entity-alias="RT1" field-name="roleTypeId" value="DROOLS_PERMROOT"/>
+            </entity-condition>
+        </view-link>
+        <view-link entity-alias="RT2" rel-entity-alias="RT3" rel-optional="true">
+            <key-map field-name="roleTypeId" rel-field-name="parentTypeId"/>
+        </view-link>
+        <view-link entity-alias="RT3" rel-entity-alias="RT4" rel-optional="true">
+            <key-map field-name="roleTypeId" rel-field-name="parentTypeId"/>
+        </view-link>
+    </view-entity>
+
+    <extend-entity entity-name="SecurityGroup">
+        <field name="groupName" type="value"></field>
+    </extend-entity>
+
+    <view-entity entity-name="DroolsRoleView"
+                 package-name="org.apache.ofbiz.drools.security"
+                 title="Security group and role type in 4 levels">
+        <member-entity entity-name="SecurityGroup" entity-alias="SG"/>
+        <member-entity entity-name="SecurityGroupRoleTypeRelation" entity-alias="SGRTR"/>
+        <member-entity entity-name="DroolsRoleTypeIn4Levels" entity-alias="DRT"/>
+        <alias-all entity-alias="DRT"/>
+        <alias entity-alias="SG" name="securityGroupId" field="groupId"/>
+        <alias entity-alias="SG" name="roleName" field="groupName"/>
+        <alias entity-alias="SG" name="roleDescription" field="description"/>
+        <alias entity-alias="SGRTR" name="roleFromDate" field="fromDate"/>
+        <alias entity-alias="SGRTR" name="roleThruDate" field="thruDate"/>
+        <view-link entity-alias="SG" rel-entity-alias="SGRTR">
+            <key-map field-name="groupId" rel-field-name="securityGroupId"/>
+        </view-link>
+        <view-link entity-alias="SGRTR" rel-entity-alias="DRT">
+            <key-map field-name="roleTypeId" rel-field-name="midRoleTypeId"/>
+        </view-link>
+    </view-entity>
+
+    <view-entity entity-name="DroolsUserRoleView"
+                 package-name="org.apache.ofbiz.drools.security"
+                 title="User login, security group and drools role view">
+        <member-entity entity-name="UserLoginAndSecurityGroup" entity-alias="ULSG"/>
+        <member-entity entity-name="DroolsRoleView" entity-alias="DRV"/>
+        <alias-all entity-alias="DRV"/>
+        <alias entity-alias="ULSG" name="userLoginId"/>
+        <alias entity-alias="ULSG" name="fromDate"/>
+        <alias entity-alias="ULSG" name="thruDate"/>
+        <view-link entity-alias="ULSG" rel-entity-alias="DRV">
+            <key-map field-name="groupId" rel-field-name="securityGroupId"/>
+        </view-link>
+    </view-entity>
+
+    <view-entity entity-name="DroolsGroupView"
+                 package-name="org.apache.ofbiz.drools.security"
+                 title="Party relationship and party group">
+        <member-entity entity-alias="PREL" entity-name="PartyRelationship"/>
+        <member-entity entity-alias="PG" entity-name="PartyGroup"/>
+        <member-entity entity-alias="P" entity-name="Party"/>
+        <alias-all entity-alias="PREL"/>
+        <alias entity-alias="PG" name="groupName" />
+        <alias entity-alias="P" name="groupDescription" field="description"/>
+        <alias entity-alias="P" name="statusId"/>
+        <view-link entity-alias="PREL" rel-entity-alias="PG">
+            <key-map field-name="partyIdFrom" rel-field-name="partyId"/>
+            <entity-condition>
+                <condition-list combine="and">
+                    <condition-expr entity-alias="PREL" field-name="partyIdTo" value="DROOLS_ORGROOT"/>
+                    <condition-expr entity-alias="PREL" field-name="roleTypeIdFrom" value="_NA_"/>
+                    <condition-expr entity-alias="PREL" field-name="roleTypeIdTo" value="_NA_"/>
+                </condition-list>
+            </entity-condition>
+        </view-link>
+        <view-link entity-alias="PG" rel-entity-alias="P" rel-optional="true">
+            <key-map field-name="partyId"/>
+        </view-link>
+    </view-entity>
+
+    <view-entity entity-name="DroolsGroupRoleView"
+                 package-name="org.apache.ofbiz.drools.party"
+                 title="Drools group view and role view">
+        <member-entity entity-alias="DGV" entity-name="DroolsGroupView"/>
+        <member-entity entity-alias="PR" entity-name="PartyRole" />
+        <member-entity entity-alias="DRV" entity-name="DroolsRoleView"/>
+        <alias-all entity-alias="DGV"/>
+        <alias-all entity-alias="DRV"/>
+        <view-link entity-alias="DGV" rel-entity-alias="PR">
+            <key-map field-name="partyIdFrom" rel-field-name="partyId"/>
+        </view-link>
+        <view-link entity-alias="PR" rel-entity-alias="DRV">
+            <key-map field-name="roleTypeId" rel-field-name="midRoleTypeId"/>
+        </view-link>
+    </view-entity>
+
+    <view-entity entity-name="DroolsUserGroupView"
+                 package-name="org.apache.ofbiz.drools.security"
+                 title="User login, security group and drools group view">
+        <member-entity entity-alias="UL" entity-name="UserLoginAndPartyDetails"/>
+        <member-entity entity-alias="PREL" entity-name="PartyRelationship"/>
+        <member-entity entity-alias="DGV" entity-name="DroolsGroupView"/>
+        <alias-all entity-alias="DGV"/>
+        <alias entity-alias="UL" name="userLoginId"/>
+        <alias entity-alias="UL" name="userPartyId" field="partyId"/>
+        <alias entity-alias="UL" name="firstName"/>
+        <alias entity-alias="UL" name="middleName"/>
+        <alias entity-alias="UL" name="lastName"/>
+        <alias entity-alias="PREL" name="userFromDate" field="fromDate"/>
+        <alias entity-alias="PREL" name="userThruDate" field="thruDate"/>
+        <view-link entity-alias="UL" rel-entity-alias="PREL">
+            <key-map field-name="partyId" rel-field-name="partyIdFrom"/>
+        </view-link>
+        <view-link entity-alias="PREL" rel-entity-alias="DGV">
+            <key-map field-name="partyIdTo" rel-field-name="partyIdFrom"/>
+        </view-link>
+    </view-entity>
+
+</entitymodel>
