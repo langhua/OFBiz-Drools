@@ -1,0 +1,30 @@
+Index: build.gradle
+===================================================================
+--- build.gradle    (revision 1877585)
++++ build.gradle    (working copy)
+@@ -33,7 +33,7 @@
+ ext.pluginsDir = "${rootDir}/specialpurpose"
+ 
+ // java settings
+-List jvmArguments = ['-Xms128M', '-Xmx1024M']
++ext.jvmArguments = ['-Xms128M', '-Xmx2048M']
+ if (project.hasProperty('jvmArgs')) {
+     jvmArguments = jvmArgs.tokenize()
+ }
+@@ -75,6 +75,8 @@
+         pluginLibsCompile
+         // runtime plugin libraries
+         pluginLibsRuntime
++        //compile-only libraries
++        pluginLibsCompileOnly
+     }
+ }
+ 
+@@ -178,6 +180,7 @@
+     subprojects.each { subProject ->
+         compile project(path: subProject.path, configuration: 'pluginLibsCompile')
+         runtime project(path: subProject.path, configuration: 'pluginLibsRuntime')
++        compileOnly project(path: subProject.path, configuration: 'pluginLibsCompileOnly')
+     }
+ 
+     // libs needed for junitreport
