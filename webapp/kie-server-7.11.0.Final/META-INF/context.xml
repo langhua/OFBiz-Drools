@@ -25,10 +25,8 @@
                                          drools-*.jar,
                                          deltaspike-core-api-*.jar,
                                          errai-*.jar,
-                                         entropy.jar,
                                          jbpm-*.jar,
                                          kie-*.jar,
-                                         ofbiz.jar,
                                          optaplanner-*.jar,
                                          resteasy-*.jar,
                                          uberfire-*.jar,
@@ -36,8 +34,6 @@
                                          jaxb-*.jar,
                                          tomcat-jta-*.jar"
                        defaultTldScan="false" tldScan="i18n-taglib-*.jar,
-                                                       jboss-*.jar,
-                                                       entropy.jar,
-                                                       ofbiz.jar"/>
+                                                       jboss-*.jar"/>
     </JarScanner>
 </Context>

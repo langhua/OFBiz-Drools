@@ -1,0 +1,237 @@
+diff --git a/kie-server-parent/kie-server-wars/kie-server/pom.xml b/kie-server-parent/kie-server-wars/kie-server/pom.xml
+index c2d76d6..cef330e 100644
+--- a/kie-server-parent/kie-server-wars/kie-server/pom.xml
++++ b/kie-server-parent/kie-server-wars/kie-server/pom.xml
+@@ -317,6 +317,7 @@
+           <descriptors>
+             <descriptor>src/main/assembly/assembly-ee7-container.xml</descriptor>
+             <descriptor>src/main/assembly/assembly-servlet-container.xml</descriptor>
++            <descriptor>src/main/assembly/assembly-ofbiz-webapp.xml</descriptor>
+           </descriptors>
+           <archive>
+             <addMavenDescriptor>false</addMavenDescriptor>
+diff --git a/kie-server-parent/kie-server-wars/kie-server/src/main/assembly/assembly-ofbiz-webapp.xml b/kie-server-parent/kie-server-wars/kie-server/src/main/assembly/assembly-ofbiz-webapp.xml
+new file mode 100644
+index 0000000..ed08ad0
+--- /dev/null
++++ b/kie-server-parent/kie-server-wars/kie-server/src/main/assembly/assembly-ofbiz-webapp.xml
+@@ -0,0 +1,95 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!--
++  ~ Copyright 2012 Red Hat, Inc. and/or its affiliates
++  ~
++  ~ Licensed under the Apache License, Version 2.0 (the "License");
++  ~ you may not use this file except in compliance with the License.
++  ~ You may obtain a copy of the License at
++  ~
++  ~       http://www.apache.org/licenses/LICENSE-2.0
++  ~
++  ~ Unless required by applicable law or agreed to in writing, software
++  ~ distributed under the License is distributed on an "AS IS" BASIS,
++  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++  ~ See the License for the specific language governing permissions and
++  ~ limitations under the License.
++  -->
++
++<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
++          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
++
++  <!-- including a . in the id will modify the *classifier* of the artifact, instead of the name/id of the artifact -->
++  <id>ofbiz</id>
++  <formats>
++    <format>war</format>
++    <format>dir</format>
++  </formats>
++
++  <includeBaseDirectory>false</includeBaseDirectory>
++  <fileSets>
++    <fileSet>
++      <directory>${project.basedir}/src/main/ofbiz-resources</directory>
++      <outputDirectory>.</outputDirectory>
++    </fileSet>
++    <fileSet>
++      <directory>${project.basedir}/src/main/webc-resources</directory>
++      <outputDirectory>.</outputDirectory>
++    </fileSet>
++    <fileSet>
++      <directory>${project.basedir}/src/main/swagger</directory>
++      <outputDirectory>docs</outputDirectory>
++    </fileSet>
++  </fileSets>
++
++<!--   <dependencySets>
++    <dependencySet>
++      <excludes>
++        <exclude>org.jboss.spec.javax.transaction:*</exclude>
++      </excludes>
++      <includes>
++        <include>org.kie.server:kie-server-services-common</include>
++        <include>org.kie.server:kie-server-services-drools</include>
++        <include>org.kie.server:kie-server-services-jbpm</include>
++        <include>org.kie.server:kie-server-services-jbpm-ui</include>
++        <include>org.kie.server:kie-server-services-case-mgmt</include>
++        <include>org.kie.server:kie-server-services-optaplanner</include>
++        <include>org.kie.server:kie-server-services-dmn</include>
++        <include>org.kie.server:kie-server-services-swagger</include>
++        <include>org.kie.server:kie-server-rest-common</include>
++        <include>org.kie.server:kie-server-rest-drools</include>
++        <include>org.kie.server:kie-server-rest-jbpm</include>
++        <include>org.kie.server:kie-server-rest-jbpm-ui</include>
++        <include>org.kie.server:kie-server-rest-case-mgmt</include>
++        <include>org.kie.server:kie-server-rest-optaplanner</include>
++        <include>org.kie.server:kie-server-rest-dmn</include>
++        <include>org.kie.server:kie-server-rest-swagger</include>
++        <include>org.kie.server:kie-server-router-client</include>
++        <include>org.kie.server:kie-server-client</include>
++        <include>org.kie:jbpm-process-svg</include>
++        
++        <include>org.kie.server:kie-server-controller-websocket-client</include>
++        <include>org.kie.server:kie-server-controller-websocket-common</include>
++
++        <include>org.slf4j:slf4j-jdk14</include>
++
++        <include>org.hibernate.common:hibernate-commons-annotations</include>
++        <include>org.hibernate:hibernate-entitymanager</include>
++        <include>org.hibernate:hibernate-core</include>
++        <include>org.hibernate:hibernate-validator</include>
++        <include>dom4j:dom4j</include>
++        <include>xerces:xercesImpl</include>
++        <include>org.jboss.narayana.tomcat:tomcat-jta</include>
++
++        <include>org.jboss.spec.javax.jms:jboss-jms-api_2.0_spec</include>
++
++        <include>org.quartz-scheduler:quartz</include>
++
++        <include>com.google.inject.extensions:guice-servlet</include>
++      </includes>
++      <outputDirectory>WEB-INF/lib</outputDirectory>
++      <useTransitiveFiltering>true</useTransitiveFiltering>
++    </dependencySet>
++  </dependencySets> -->
++
++</assembly>
+diff --git a/kie-server-parent/kie-server-wars/kie-server/src/main/ofbiz-resources/META-INF/context.xml b/kie-server-parent/kie-server-wars/kie-server/src/main/ofbiz-resources/META-INF/context.xml
+new file mode 100644
+index 0000000..b332d30
+--- /dev/null
++++ b/kie-server-parent/kie-server-wars/kie-server/src/main/ofbiz-resources/META-INF/context.xml
+@@ -0,0 +1,39 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<Context>
++    <!-- Narayana resources -->
++    <Transaction factory="org.jboss.narayana.tomcat.jta.UserTransactionFactory"/>
++    <Resource name="TransactionManager" type="javax.transaction.TransactionManager"
++              factory="org.jboss.narayana.tomcat.jta.TransactionManagerFactory"/>
++    <Resource name="TransactionSynchronizationRegistry" type="javax.transaction.TransactionSynchronizationRegistry"
++              factory="org.jboss.narayana.tomcat.jta.TransactionSynchronizationRegistryFactory"/>
++
++    <Realm className="org.langhua.ofbiz.drools.authentication.OFBizDroolsRealm"/>
++
++    <Listener className="org.kie.integration.tomcat.RealmProviderLifeCycleListener" />
++    
++    <Resource name="BeanManager"
++              auth="Container"
++              type="javax.enterprise.inject.spi.BeanManager"
++              factory="org.jboss.weld.resources.ManagerObjectFactory"/>
++    
++    <Valve className="org.langhua.ofbiz.drools.tomcat.OFBizPluginJACCValve" />
++    
++    <JarScanner className="org.langhua.ofbiz.webapp.jarscan.DroolsJarScanner" scanBootstrapClassPath="true">
++        <JarScanFilter className="org.langhua.ofbiz.webapp.jarscan.DroolsJarScanFilter" defaultPluggabilityScan="false"
++                       pluggabilityScan="batik-*.jar,
++                                         cdi-api-*.jar,
++                                         drools-*.jar,
++                                         deltaspike-core-api-*.jar,
++                                         errai-*.jar,
++                                         jbpm-*.jar,
++                                         kie-*.jar,
++                                         optaplanner-*.jar,
++                                         resteasy-*.jar,
++                                         uberfire-*.jar,
++                                         weld-*.jar,
++                                         jaxb-*.jar,
++                                         tomcat-jta-*.jar"
++                       defaultTldScan="false" tldScan="i18n-taglib-*.jar,
++                                                       jboss-*.jar"/>
++    </JarScanner>
++</Context>
+\ No newline at end of file
+diff --git a/kie-server-parent/kie-server-wars/kie-server/src/main/ofbiz-resources/WEB-INF/web.xml b/kie-server-parent/kie-server-wars/kie-server/src/main/ofbiz-resources/WEB-INF/web.xml
+new file mode 100644
+index 0000000..374b518
+--- /dev/null
++++ b/kie-server-parent/kie-server-wars/kie-server/src/main/ofbiz-resources/WEB-INF/web.xml
+@@ -0,0 +1,72 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<web-app xmlns="http://java.sun.com/xml/ns/javaee"
++         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++         version="2.5"
++         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
++  <display-name>KieServer</display-name>
++  <listener>
++    <listener-class>org.jboss.narayana.tomcat.jta.NarayanaJtaServletContextListener</listener-class>
++  </listener>
++  <listener>
++    <listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
++  </listener>
++
++  <filter>
++    <filter-name>capture-request-filter</filter-name>
++    <filter-class>org.kie.server.services.impl.security.web.CaptureHttpRequestFilter</filter-class>
++  </filter>
++  <filter-mapping>
++    <filter-name>capture-request-filter</filter-name>
++    <url-pattern>/*</url-pattern>
++  </filter-mapping>
++  <servlet>
++    <servlet-name>Resteasy</servlet-name>
++    <servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
++    <init-param>
++      <param-name>javax.ws.rs.Application</param-name>
++      <param-value>org.kie.server.remote.rest.common.KieServerApplication</param-value>
++    </init-param>
++  </servlet>
++  <servlet-mapping>
++    <servlet-name>Resteasy</servlet-name>
++    <url-pattern>/services/rest/*</url-pattern>
++  </servlet-mapping>
++  <context-param>
++    <param-name>resteasy.servlet.mapping.prefix</param-name>
++    <param-value>/services/rest</param-value>
++  </context-param>
++
++  <security-constraint>
++    <web-resource-collection>
++      <web-resource-name>Swagger web resources</web-resource-name>
++      <url-pattern>/services/rest/server/swagger.json</url-pattern>
++      <http-method>GET</http-method>
++    </web-resource-collection>
++    <!-- No authentication. Swagger resources should be accessible without authentication. -->
++  </security-constraint>
++  <security-constraint>
++    <web-resource-collection>
++      <web-resource-name>REST web resources</web-resource-name>
++      <url-pattern>/services/rest/*</url-pattern>
++      <http-method>GET</http-method>
++      <http-method>PUT</http-method>
++      <http-method>POST</http-method>
++      <http-method>DELETE</http-method>
++    </web-resource-collection>
++    <auth-constraint>
++      <role-name>kie-server</role-name>
++      <role-name>user</role-name>
++    </auth-constraint>
++  </security-constraint>
++  <login-config>
++    <auth-method>BASIC</auth-method>
++    <realm-name>KIE Server</realm-name>
++  </login-config>
++  <security-role>
++    <role-name>kie-server</role-name>
++  </security-role>
++  <security-role>
++    <role-name>user</role-name>
++  </security-role>
++
++</web-app>

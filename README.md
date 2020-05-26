@@ -94,19 +94,24 @@ and check a specific container status by http://localhost:8080/kie-server/servic
 
 ### Development Notes
 
-1. How to build webapp/drools-wb-7.11.0.Final
+1. How to build webapp/drools-wb-7.11.0.Final for this plugin
 
-1.1 Apply kie/kie-drools-wb-distribution-wars-7.11.0.Final.patch to [kie-wb-distributions/kie-drools-wb-parent/kie-drools-wb-distribution-wars/](https://github.com/kiegroup/kie-wb-distributions/tree/7.11.0.Final/kie-drools-wb-parent/kie-drools-wb-distribution-wars)
+1.1. Apply kie/kie-drools-wb-distribution-wars-7.11.0.Final.patch to [kie-wb-distributions/kie-drools-wb-parent/kie-drools-wb-distribution-wars/](https://github.com/kiegroup/kie-wb-distributions/tree/7.11.0.Final/kie-drools-wb-parent/kie-drools-wb-distribution-wars)
 
 ![apply patch to kie-drools-wb-distribution-wars](docs/images/sandflower-kie-drools-wb-distribution-wars-patch.png)
 
-1.2 Run mvn package to build target/kie-drools-wb-7.11.0.Final-ofbiz, it's the webapp/drools-wb-7.11.0.Final
+1.2. Run mvn package to build target/kie-drools-wb-7.11.0.Final-ofbiz, it's the webapp/drools-wb-7.11.0.Final
 
 ![build kie-drools-wb-7.11.0.Final-ofbiz](docs/images/sandflower-kie-drools-wb-distribution-wars-package.png)
 
+2. How to build webapp/kie-server-7.11.0.Final for this plugin
 
+2.1. Apply kie/kie-server-7.11.0.Final.patch to [droolsjbpm-integration/kie-server-parent/kie-server-wars/kie-server/](https://github.com/kiegroup/droolsjbpm-integration/tree/7.11.0.Final/kie-server-parent/kie-server-wars/kie-server)
 
-2. How to build webapp/kie-server-7.11.0.Final
+![apply patch to kie-server](docs/images/sandflower-kie-server-patch.png)
 
+2.2. Run mvn package to build target/kie-server-7.11.0.Final-ofbiz, it's the webapp/kie-server-7.11.0.Final
+
+![build kie-server-7.11.0.Final-ofbiz](docs/images/sandflower-kie-server-package.png)
 
 
