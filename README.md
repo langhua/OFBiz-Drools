@@ -41,16 +41,22 @@ gradle ofbiz
 ```
 
 8. In browser, visit http://localhost:8080/kie-server/services/rest/server
+
 Username: kieserver
+
 Password: sandflower
+
 After login successfully, you can see kie server information.
 
 ![kie server](docs/images/sandflower-kie-server.png)
 
 
 9. In browser, visit https://localhost:8443/drools-wb/
+
 Username: admin
+
 Password: ofbiz
+
 After login successfully, you can use drools workbench now.
 
 10. Import a sample in Design, i.e. Mortgages and deploy it.
@@ -68,6 +74,7 @@ and check a specific container status by http://localhost:8080/kie-server/servic
 ![kie server container](docs/images/sandflower-kie-server-container.png)
 
 13. Call rules in a kie-server container in postman:
+
 13.1. Set Auth to Basic Auth, Username: kieserver, Password: sandflower
 
 ![call rules in kie server: set Auth](docs/images/sandflower-kie-server-container-postman-Authorization.png)
@@ -88,6 +95,15 @@ and check a specific container status by http://localhost:8080/kie-server/servic
 ### Development Notes
 
 1. How to build webapp/drools-wb-7.11.0.Final
+
+1.1 Apply kie/kie-drools-wb-distribution-wars-7.11.0.Final.patch to [kie-wb-distributions/kie-drools-wb-parent/kie-drools-wb-distribution-wars/](https://github.com/kiegroup/kie-wb-distributions/tree/7.11.0.Final/kie-drools-wb-parent/kie-drools-wb-distribution-wars)
+
+![apply patch to kie-drools-wb-distribution-wars](docs/images/sandflower-kie-drools-wb-distribution-wars-patch.png)
+
+1.2 Run mvn package to build target/kie-drools-wb-7.11.0.Final-ofbiz, it's the webapp/drools-wb-7.11.0.Final
+
+![build kie-drools-wb-7.11.0.Final-ofbiz](docs/images/sandflower-kie-drools-wb-distribution-wars-package.png)
+
 
 
 2. How to build webapp/kie-server-7.11.0.Final
