@@ -1,4 +1,4 @@
-[English](README.md) | [Chinese](docs/README_ZH.md)
+[English](README.md) | [中文](docs/README_ZH.md)
 
 # OFBiz Drools Plugin
 
@@ -98,7 +98,7 @@ After login successfully, you can use drools workbench now.
 
 ![kie server containers](docs/images/sandflower-kie-server-containers.png)
 
-and check a specific container status by http://localhost:8080/kie-server/services/rest/server/containers/mortgages:mortgages:1.0.0-SNAPSHOT:
+and check a specific container status, i.e. mortgages:mortgages:1.0.0-SNAPSHOT, by http://localhost:8080/kie-server/services/rest/server/containers/mortgages:mortgages:1.0.0-SNAPSHOT:
 
 ![kie server container](docs/images/sandflower-kie-server-container.png)
 
@@ -140,7 +140,7 @@ and check a specific container status by http://localhost:8080/kie-server/servic
 
 <br/>
 
-1.2. Run mvn package to build target/kie-drools-wb-7.11.0.Final-ofbiz, it's the webapp/drools-wb-7.11.0.Final
+1.2. Run mvn clean package to build target/kie-drools-wb-7.11.0.Final-ofbiz, it's the webapp/drools-wb-7.11.0.Final
 
 ![build kie-drools-wb-7.11.0.Final-ofbiz](docs/images/sandflower-kie-drools-wb-distribution-wars-package.png)
 
@@ -154,7 +154,7 @@ and check a specific container status by http://localhost:8080/kie-server/servic
 
 <br/>
 
-2.2. Run mvn package to build target/kie-server-7.11.0.Final-ofbiz, it's the webapp/kie-server-7.11.0.Final
+2.2. Run mvn clean package to build target/kie-server-7.11.0.Final-ofbiz, it's the webapp/kie-server-7.11.0.Final
 
 ![build kie-server-7.11.0.Final-ofbiz](docs/images/sandflower-kie-server-package.png)
 
@@ -293,7 +293,7 @@ In this plugin, the default kie server id is set to runtime/drools/ofbiz-kie-ser
 rootProject.jvmArguments.add('-Dorg.kie.server.id=runtime/drools/ofbiz-kie-server')
 ```
 
-The ofbiz-kie-server.xml is expected to be auto-created during first startup and stored under and loaded from runtime/drools/:
+The ofbiz-kie-server.xml is expected to be auto-created during first startup and stored under runtime/drools/, afterwards loading configurations in new startup from it:
 
 ![runtime/drools/ofbiz-kie-server.xml](docs/images/sandflower-ofbiz-kie-server-xml.png)
 
@@ -337,6 +337,32 @@ The gradle version in gradle/wrapper/gradle-wrapper.properties is 2.13. It has a
 
 <br/>
 
+**9. Why lib/juel-impl-no-osgi-2.2.7.jar**
+
+The original version of juel-impl-2.2.7.jar is included in build.gradle:
+
+```groovy
+    compile 'de.odysseus.juel:juel-impl:2.2.7'
+```
+
+and it contains a services.xml under OSGI-INFO, the xml content is:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
+    <scr:component name="de.odysseus.el.ExpressionFactoryImpl">
+        <implementation class="de.odysseus.el.ExpressionFactoryImpl"/>
+        <service>
+            <provide interface="javax.el.ExpressionFactory"/>
+        </service>
+    </scr:component>
+</root>
+```
+
+This OSGI config makes EL expressions in the jsp files error, so I unzipped the juel-impl-2.2.7.jar, removed OSGI-INFO and zip again, named the new jar to juel-impl-no-osgi-2.2.7.jar and placed it under lib folder. Then the jsp files work fine.
+
+<br/>
+
 Thanks for reading this document.
 
---- End ---
+--- END ---
