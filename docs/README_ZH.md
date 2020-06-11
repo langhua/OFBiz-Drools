@@ -46,7 +46,7 @@ distributionUrl=https\://services.gradle.org/distributions/gradle-4.9-bin.zip
 
 <br/>
 
-**6. 通过下面的命令来安装OFBiz种子数据: **
+**6. 通过下面的命令来安装OFBiz种子数据:**
 
 ```
 gradle loadDefault
