@@ -42,7 +42,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.Collections.emptyList;
 import static org.apache.lucene.search.BooleanClause.Occur.MUST;
 import static org.apache.lucene.search.BooleanClause.Occur.SHOULD;
-import static org.apache.lucene.search.NumericRangeQuery.newLongRange;
+import static org.apache.lucene.document.LongPoint.newRangeQuery;
 import static org.uberfire.ext.metadata.engine.MetaIndexEngine.FULL_TEXT_FIELD;
 
 public class ElasticSearchSearchIndex implements SearchIndex {
@@ -148,11 +148,9 @@ public class ElasticSearchSearchIndex implements SearchIndex {
             if (entry.getValue() instanceof DateRange) {
                 final Long from = ((DateRange) entry.getValue()).after().getTime();
                 final Long to = ((DateRange) entry.getValue()).before().getTime();
-                query.add(newLongRange(entry.getKey(),
+                query.add(newRangeQuery(entry.getKey(),
                                         from,
-                                        to,
-                                        true,
-                                        true),
+                                        to),
                           MUST);
             } else if (entry.getValue() instanceof String) {
                 query.add(new WildcardQuery(new Term(entry.getKey(),

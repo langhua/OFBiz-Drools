@@ -64,9 +64,23 @@
         </view-link>
     </view-entity>
 
-    <extend-entity entity-name="SecurityGroup">
-        <field name="groupName" type="value"></field>
-    </extend-entity>
+    <view-entity entity-name="DroolsUserLoginAndSecurityGroup"
+                 package-name="org.apache.ofbiz.security.securitygroup"
+                 title="User login and security group">
+        <member-entity entity-name="UserLoginSecurityGroup" entity-alias="ULSG"/>
+        <member-entity entity-name="SecurityGroup" entity-alias="SG"/>
+        <alias entity-alias="ULSG" name="userLoginId"/>
+        <alias entity-alias="ULSG" name="securityGroupId" field="groupId"/>
+        <alias entity-alias="ULSG" name="fromDate"/>
+        <alias entity-alias="ULSG" name="thruDate"/>
+        <alias entity-alias="SG" name="securityGroupName" field="groupName"/>
+        <alias entity-alias="SG" name="securityGroupDesc" field="description"/>
+        <alias entity-alias="SG" name="createdBy"/>
+        <alias entity-alias="SG" name="createdStamp"/>
+        <view-link entity-alias="ULSG" rel-entity-alias="SG">
+            <key-map field-name="groupId"/>
+        </view-link>
+    </view-entity>
 
     <view-entity entity-name="DroolsRoleView"
                  package-name="org.apache.ofbiz.drools.security"
@@ -91,14 +105,14 @@
     <view-entity entity-name="DroolsUserRoleView"
                  package-name="org.apache.ofbiz.drools.security"
                  title="User login, security group and drools role view">
-        <member-entity entity-name="UserLoginAndSecurityGroup" entity-alias="ULSG"/>
+        <member-entity entity-name="DroolsUserLoginAndSecurityGroup" entity-alias="ULSG"/>
         <member-entity entity-name="DroolsRoleView" entity-alias="DRV"/>
         <alias-all entity-alias="DRV"/>
         <alias entity-alias="ULSG" name="userLoginId"/>
         <alias entity-alias="ULSG" name="fromDate"/>
         <alias entity-alias="ULSG" name="thruDate"/>
         <view-link entity-alias="ULSG" rel-entity-alias="DRV">
-            <key-map field-name="groupId" rel-field-name="securityGroupId"/>
+            <key-map field-name="securityGroupId"/>
         </view-link>
     </view-entity>
 

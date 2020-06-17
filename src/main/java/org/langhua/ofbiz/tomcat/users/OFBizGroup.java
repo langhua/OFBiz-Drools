@@ -18,6 +18,7 @@ package org.langhua.ofbiz.tomcat.users;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
 
 import org.apache.catalina.Role;
 import org.apache.catalina.User;
@@ -29,7 +30,6 @@ import org.apache.ofbiz.entity.GenericEntityException;
 import org.apache.ofbiz.entity.GenericValue;
 import org.apache.ofbiz.entity.util.EntityQuery;
 import org.apache.tomcat.util.buf.StringUtils;
-import org.apache.tomcat.util.buf.StringUtils.Function;
 
 /**
  * OFBiz implementation of {@link org.apache.catalina.Group} for the
@@ -228,7 +228,7 @@ public class OFBizGroup extends AbstractGroup {
         List<Role> roles = getGroupRoles();
         if (roles.size() > 0) {
             sb.append(" roles=\"");
-            StringUtils.join(roles, ',', new Function<Role>(){
+            StringUtils.join(roles, ',', new Function<Role, String>(){
                 @Override public String apply(Role t) { return t.getRolename(); }}, sb);
             sb.append("\"");
         }

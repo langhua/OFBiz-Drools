@@ -1,0 +1,11 @@
+org.kie.bc.client.KieWorkbenchEntryPoint
+org.kie.bc.client.resources.i18n.NavigationConstants
+org.kie.bc.client.resources.i18n.AppConstants
+org.kie.bc.client.perspectives.DroolsAuthoringPerspective
+org.kie.bc.backend.AppSetup
+org.kie.bc.client.navigation.NavTreeDefinitions
+org.kie.bc.client.perspectives.M2RepoPerspective
+org.kie.bc.client.RepositoryPreferencesProducer
+org.kie.bc.client.perspectives.DroolsAuthoringPerspectiveActivity
+org.kie.bc.client.navbar.AppNavBar
+org.kie.bc.client.perspectives.M2RepoPerspectiveActivity

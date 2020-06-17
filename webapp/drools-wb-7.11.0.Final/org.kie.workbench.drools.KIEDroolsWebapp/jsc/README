@@ -1,3 +1,0 @@
-This folder contains the compressed javascript files for the editors.
-
-The javascript is compressed at runtime. It is never committed in the repository - the contents of this folder are added to .gitignore.

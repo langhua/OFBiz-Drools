@@ -19,6 +19,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
+
 import org.apache.catalina.Group;
 import org.apache.catalina.Role;
 import org.apache.catalina.UserDatabase;
@@ -35,7 +37,6 @@ import org.apache.ofbiz.entity.condition.EntityOperator;
 import org.apache.ofbiz.entity.util.EntityQuery;
 import org.apache.ofbiz.entity.util.EntityUtilProperties;
 import org.apache.tomcat.util.buf.StringUtils;
-import org.apache.tomcat.util.buf.StringUtils.Function;
 import org.apache.tomcat.util.security.Escape;
 
 /**
@@ -486,7 +487,7 @@ public class OFBizUser extends AbstractUser {
         List<Group> groups = getUserGroups(username);
         if (groups.size() > 0) {
             sb.append(" groups=\"");
-            StringUtils.join(groups, ',', new Function<Group>() {
+            StringUtils.join(groups, ',', new Function<Group, String>() {
                 @Override public String apply(Group t) {
                     return Escape.xml(t.getGroupname());
                 }
@@ -496,7 +497,7 @@ public class OFBizUser extends AbstractUser {
         List<Role> roles = getUserRoles(username);
         if (roles.size() > 0) {
             sb.append(" roles=\"");
-            StringUtils.join(roles, ',', new Function<Role>() {
+            StringUtils.join(roles, ',', new Function<Role, String>() {
                 @Override public String apply(Role t) {
                     return Escape.xml(t.getRolename());
                 }
@@ -523,7 +524,7 @@ public class OFBizUser extends AbstractUser {
         List<Group> groups = getUserGroups(username);
         if (groups.size() > 0) {
             sb.append(", groups=\"");
-            StringUtils.join(groups, ',', new Function<Group>() {
+            StringUtils.join(groups, ',', new Function<Group, String>() {
                 @Override public String apply(Group t) {
                     return Escape.xml(t.getGroupname());
                 }
@@ -533,7 +534,7 @@ public class OFBizUser extends AbstractUser {
         List<Role> roles = getUserRoles(username);
         if (roles.size() > 0) {
             sb.append(", roles=\"");
-            StringUtils.join(roles, ',', new Function<Role>() {
+            StringUtils.join(roles, ',', new Function<Role, String>() {
                 @Override public String apply(Role t) {
                     return Escape.xml(t.getRolename());
                 }

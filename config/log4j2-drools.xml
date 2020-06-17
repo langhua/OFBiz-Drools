@@ -35,16 +35,28 @@
         <AsyncLogger name="org.jboss" level="info" additivity="false" includeLocation="true">
             <AppenderRef ref="droolslogfile"/>
         </AsyncLogger>
-        <AsyncLogger name="org.langhua.ofbiz.webapp.jarscan.DroolsJarScanFilter" level="info" additivity="false" includeLocation="true">
-            <AppenderRef ref="droolslogfile"/>
-        </AsyncLogger>
-        <AsyncLogger name="org.langhua.ofbiz.webapp.jarscan.DroolsJarScanner" level="info" additivity="false" includeLocation="true">
+        <AsyncLogger name="org.langhua.ofbiz.webapp.jarscan" level="info" additivity="false" includeLocation="true">
             <AppenderRef ref="droolslogfile"/>
         </AsyncLogger>
         <AsyncLogger name="org.springframework" level="info" additivity="false" includeLocation="true">
             <AppenderRef ref="droolslogfile"/>
         </AsyncLogger>
         <AsyncLogger name="com.arjuna" level="info" additivity="false" includeLocation="true">
+            <AppenderRef ref="droolslogfile"/>
+        </AsyncLogger>
+        <AsyncLogger name="org.eclipse" level="info" additivity="false" includeLocation="true">
+            <AppenderRef ref="droolslogfile"/>
+        </AsyncLogger>
+        <AsyncLogger name="com.fasterxml.jackson" level="info" additivity="false" includeLocation="true">
+            <AppenderRef ref="droolslogfile"/>
+        </AsyncLogger>
+        <AsyncLogger name="com.google" level="info" additivity="false" includeLocation="true">
+            <AppenderRef ref="droolslogfile"/>
+        </AsyncLogger>
+        <AsyncLogger name="org.codehaus.jackson" level="info" additivity="false" includeLocation="true">
+            <AppenderRef ref="droolslogfile"/>
+        </AsyncLogger>
+        <AsyncLogger name="org.guvnor.rest" level="info" additivity="false" includeLocation="true">
             <AppenderRef ref="droolslogfile"/>
         </AsyncLogger>
     </Loggers>

@@ -4,17 +4,32 @@
 
     <RoleType roleTypeId="DROOLS_ADMIN" parentTypeId="DROOLS_PERMROOT" hasTable="N" description="admin"/>
     <RoleType roleTypeId="DROOLS_ANALYST" parentTypeId="DROOLS_PERMROOT" hasTable="N" description="analyst"/>
+    <RoleType roleTypeId="DROOLS_DEVELOPER" parentTypeId="DROOLS_PERMROOT" hasTable="N" description="analyst"/>
+    <RoleType roleTypeId="DROOLS_MANAGER" parentTypeId="DROOLS_PERMROOT" hasTable="N" description="analyst"/>
+    <RoleType roleTypeId="DROOLS_PROCESS_ADMIN" parentTypeId="DROOLS_PERMROOT" hasTable="N" description="analyst"/>
+    <RoleType roleTypeId="DROOLS_USER" parentTypeId="DROOLS_PERMROOT" hasTable="N" description="analyst"/>
     <RoleType roleTypeId="DROOLS_RESTALL" parentTypeId="DROOLS_PERMROOT" hasTable="N" description="rest-all"/>
+    <RoleType roleTypeId="DROOLS_RESTPROJECT" parentTypeId="DROOLS_PERMROOT" hasTable="N" description="rest-project"/>
     <RoleType roleTypeId="DROOLS_KIESERVER" parentTypeId="DROOLS_PERMROOT" hasTable="N" description="kie-server"/>
 
     <SecurityGroup groupId="DROOLS_ADMIN" groupName="admin"  description="Drools Admin"/>
     <SecurityGroup groupId="DROOLS_ANALYST" groupName="analyst"  description="Drools Analyst"/>
+    <SecurityGroup groupId="DROOLS_DEVELOPER" groupName="developer"  description="Drools Developer"/>
+    <SecurityGroup groupId="DROOLS_MANAGER" groupName="manager"  description="Drools Manager"/>
+    <SecurityGroup groupId="DROOLS_PROCESS_ADMIN" groupName="process admin"  description="Drools Process Admin"/>
+    <SecurityGroup groupId="DROOLS_USER" groupName="user"  description="Drools User"/>
     <SecurityGroup groupId="DROOLS_RESTALL" groupName="rest-all"  description="Drools Rest All"/>
+    <SecurityGroup groupId="DROOLS_RESTPROJECT" groupName="rest-project"  description="Drools Rest Project"/>
     <SecurityGroup groupId="DROOLS_KIESERVER" groupName="kie-server"  description="Drools Kie Server"/>
 
     <SecurityGroupRoleTypeRelation securityGroupId="DROOLS_ADMIN" roleTypeId="DROOLS_ADMIN" fromDate="2001-05-13 12:00:00.0"/>
     <SecurityGroupRoleTypeRelation securityGroupId="DROOLS_ANALYST" roleTypeId="DROOLS_ANALYST" fromDate="2001-05-13 12:00:00.0"/>
+    <SecurityGroupRoleTypeRelation securityGroupId="DROOLS_DEVELOPER" roleTypeId="DROOLS_DEVELOPER" fromDate="2001-05-13 12:00:00.0"/>
+    <SecurityGroupRoleTypeRelation securityGroupId="DROOLS_MANAGER" roleTypeId="DROOLS_MANAGER" fromDate="2001-05-13 12:00:00.0"/>
+    <SecurityGroupRoleTypeRelation securityGroupId="DROOLS_PROCESS_ADMIN" roleTypeId="DROOLS_PROCESS_ADMIN" fromDate="2001-05-13 12:00:00.0"/>
+    <SecurityGroupRoleTypeRelation securityGroupId="DROOLS_USER" roleTypeId="DROOLS_USER" fromDate="2001-05-13 12:00:00.0"/>
     <SecurityGroupRoleTypeRelation securityGroupId="DROOLS_RESTALL" roleTypeId="DROOLS_RESTALL" fromDate="2001-05-13 12:00:00.0"/>
+    <SecurityGroupRoleTypeRelation securityGroupId="DROOLS_RESTPROJECT" roleTypeId="DROOLS_RESTPROJECT" fromDate="2001-05-13 12:00:00.0"/>
     <SecurityGroupRoleTypeRelation securityGroupId="DROOLS_KIESERVER" roleTypeId="DROOLS_KIESERVER" fromDate="2001-05-13 12:00:00.0"/>
 
     <Party partyId="DROOLS_ORGROOT" description="Drools Group Root" statusId="PARTY_ENABLED"/>
@@ -22,14 +37,12 @@
     <PartyRole partyId="DROOLS_ORGROOT" roleTypeId="_NA_"/>
 
     <Party partyId="droolsrest" partyTypeId="PERSON" statusId="PARTY_ENABLED"/>
-    <UserLogin userLoginId="droolsrest" partyId="droolsrest" currentPassword="{SHA}ae982ceae1a1e670397936d2984e27f288de1731"/>
+    <UserLogin userLoginId="droolsrest" partyId="droolsrest" currentPassword="{PBKDF2-SHA256}10000$WzEyNSwgLTkxLCAtMzgsIDcsIC0xNywgMTAyLCA4MSwgLTIyLCAtMTEyLCA2LCA4OSwgLTkyLCA1NCwgNzQsIC0xOCwgLTkxXQ==$NDMi+/dx0cM+U0tlc2e7r0lJnrjWrnCfUmG35NE8Oz4="/>
     <UserLoginSecurityGroup groupId="DROOLS_ADMIN" userLoginId="droolsrest" fromDate="2001-01-01 12:00:00.0"/>
     <UserLoginSecurityGroup groupId="DROOLS_RESTALL" userLoginId="droolsrest" fromDate="2001-01-01 12:00:00.0"/>
 
     <Party partyId="kieserver" partyTypeId="PERSON" statusId="PARTY_ENABLED"/>
-    <UserLogin userLoginId="kieserver" partyId="kieserver" currentPassword="{SHA}ae982ceae1a1e670397936d2984e27f288de1731"/>
+    <UserLogin userLoginId="kieserver" partyId="kieserver" currentPassword="{PBKDF2-SHA256}10000$WzEyNSwgLTkxLCAtMzgsIDcsIC0xNywgMTAyLCA4MSwgLTIyLCAtMTEyLCA2LCA4OSwgLTkyLCA1NCwgNzQsIC0xOCwgLTkxXQ==$NDMi+/dx0cM+U0tlc2e7r0lJnrjWrnCfUmG35NE8Oz4="/>
     <UserLoginSecurityGroup groupId="DROOLS_ADMIN" userLoginId="kieserver" fromDate="2001-01-01 12:00:00.0"/>
     <UserLoginSecurityGroup groupId="DROOLS_KIESERVER" userLoginId="kieserver" fromDate="2001-01-01 12:00:00.0"/>
-
-    <UserLoginSecurityGroup groupId="DROOLS_ADMIN" userLoginId="admin" fromDate="2001-01-01 12:00:00.0"/>
 </entity-engine-xml>

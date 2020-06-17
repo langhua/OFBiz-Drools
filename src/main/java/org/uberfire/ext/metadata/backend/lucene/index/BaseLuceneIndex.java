@@ -52,9 +52,9 @@ public abstract class BaseLuceneIndex implements LuceneIndex {
                                                   docIds);
             for (final int docId : answers) {
                 if (docId != -1) {
-                    boolean result = writer().tryDeleteDocument(searcher.getIndexReader(),
+                    long result = writer().tryDeleteDocument(searcher.getIndexReader(),
                                                              docId);
-                    if (result) {
+                    if (result >= 0) {
                         deletedSomething = true;
                     }
                 }
@@ -91,7 +91,7 @@ public abstract class BaseLuceneIndex implements LuceneIndex {
         final TermsEnum[] termsEnums = new TermsEnum[subReaders.size()];
         final PostingsEnum[] docsEnums = new PostingsEnum[subReaders.size()];
         for (int subIDX = 0; subIDX < subReaders.size(); subIDX++) {
-            termsEnums[subIDX] = subReaders.get(subIDX).reader().fields().terms("id").iterator();
+            termsEnums[subIDX] = subReaders.get(subIDX).reader().terms("id").iterator();
         }
 
         int[] results = new int[ids.length];

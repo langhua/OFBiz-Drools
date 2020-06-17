@@ -1,16 +1,20 @@
-def ofbizVersion = '16.11'
-def droolsVersion = '7.11.0.Final'
-def elasticsearchVersion = '2.1.2'
-def luceneVersion = '5.3.1'
-def jacksonVersion = '2.8.9'
-def dashbuilderVersion = '2.8.0.Final'
-def uberfireVersion = '2.8.0.Final'
-def erraiVersion = '4.3.2.Final'
-def weldVersion = '2.4.Final'
-def tomcatVersion = '8.5.40'
-// for tomcat 8.5.x
-def resteasyVersion = '3.0.26.Final'
-def javassistVersion = '3.21.0-GA'
+def ofbizVersion = '17.12'
+def droolsVersion = '7.17.0.Final'
+def dashbuilderVersion = '2.14.0.Final'
+def uberfireVersion = '2.14.0.Final'
+def erraiVersion = '4.4.1.Final'
+// lucene 7.1.0
+def elasticsearchVersion = '6.1.1'
+def luceneVersion = '7.1.0'
+// for tomcat 9.0.x
+def tomcatVersion = '9.0.31'
+def resteasyVersion = '3.0.26.Final'  // cdi-api 1.2
+def javassistVersion = '3.20.0-GA'
+// other tools
+def jgitVersion = '4.8.0.201706111038-r'
+def codehausJacksonVersion = '1.9.13'
+def infinispanVersion = '9.3.2.Final'
+def jacksonVersion = '2.9.5'
 
 // set log4j runtime configuration files
 def findLogArg = false
@@ -22,13 +26,13 @@ rootProject.jvmArguments.each { jvmArg ->
         if (!jvmArg.endsWith("=")) {
             jvmArg += ","
         }
-        log4jConfig = jvmArg + "hot-deploy/drools/config/log4j2-drools.xml"
+        log4jConfig = jvmArg + "log4j2-drools.xml"
         findLogArg = true
         return true
     }
 }
 if (!findLogArg) {
-    rootProject.jvmArguments.add('-Dlog4j.configurationFile=log4j2.xml,hot-deploy/drools/config/log4j2-drools.xml')
+    rootProject.jvmArguments.add('-Dlog4j.configurationFile=log4j2.xml,log4j2-drools.xml')
 } else {
     rootProject.jvmArguments.remove(originalLog4jConfig)
     rootProject.jvmArguments.add(log4jConfig)
@@ -36,37 +40,28 @@ if (!findLogArg) {
 
 rootProject.configurations.each { conf ->
     conf.resolutionStrategy.dependencySubstitution {
-        substitute(module('javax.ws.rs:jsr311-api'))
-                  // Prefer org.jboss.spec.javax.ws.rs for javax.ws.rs
-                  .with(module('org.jboss.spec.javax.ws.rs:jboss-jaxrs-api_2.0_spec:1.0.1.Final'))
-        // Use a rule to change the dependency module while leaving group + module intact
-        all { DependencySubstitution dependency ->
-            if (dependency.requested instanceof ModuleComponentSelector && dependency.requested.group == 'org.elasticsearch') {
-                dependency.useTarget dependency.requested.group + ':' + dependency.requested.module + ':' + elasticsearchVersion
-            }
-            if (dependency.requested instanceof ModuleComponentSelector && dependency.requested.group == 'org.apache.lucene') {
-                dependency.useTarget dependency.requested.group + ':' + dependency.requested.module + ':' + luceneVersion
-            }
-            if (dependency.requested instanceof ModuleComponentSelector && dependency.requested.group == 'com.fasterxml.jackson.core') {
-                dependency.useTarget dependency.requested.group + ':' + dependency.requested.module + ':' + jacksonVersion
-            }
-        }
+        substitute(module('com.fasterxml.jackson.core:jackson-core'))
+                     .with(module('com.fasterxml.jackson.core:jackson-core:' + jacksonVersion))
+        substitute(module('com.fasterxml.jackson.core:jackson-databind'))
+                     .with(module('com.fasterxml.jackson.core:jackson-databind:' + jacksonVersion))
+        substitute(module('com.fasterxml.jackson.core:jackson-annotations'))
+                     .with(module('com.fasterxml.jackson.core:jackson-annotations:' + jacksonVersion))
     }
 }
 
 rootProject.configurations.compile {
-//    exclude group: 'javax.servlet', module: 'servlet-api'
-//    exclude group: 'org.bouncycastle'
-	exclude group: 'org.apache.lucene', module: 'lucene-spatial-extras'
-	exclude group: 'javax.ws.rs', module: 'jsr311-api'
+    exclude group: 'bouncycastle'
+    exclude group: 'org.zapodot', module: 'jackson-databind-java-optional'
+    exclude group: 'org.apache.htrace'
+    exclude group: 'javax.ws.rs'
 }
 
 rootProject.configurations.runtime {
-//    exclude group: 'javax.servlet', module: 'servlet-api'
-//    exclude group: 'org.bouncycastle'
+    exclude group: 'bouncycastle'
     exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
     exclude group: 'org.uberfire', module: 'uberfire-commons'
     exclude group: 'org.python', module: 'jython'
+    exclude group: 'org.zapodot', module: 'jackson-databind-java-optional'
 }
 
 // set drools runtime configurations
@@ -83,7 +78,7 @@ rootProject.jvmArguments.add('-Dcom.arjuna.ats.arjuna.objectstore.objectStoreDir
 rootProject.jvmArguments.add('-DObjectStoreEnvironmentBean.objectStoreDir=runtime/drools/ObjectStore')
 rootProject.jvmArguments.add('-Dorg.jboss.logging.provider=log4j2')
 
-rootProject.jvmArguments.add('-Dorg.appformer.m2repo.url=http://localhost:8080/drools-wb/maven2')
+rootProject.jvmArguments.add('-Dorg.appformer.m2repo.url=http://localhost:8080/kie-wb/maven2')
 rootProject.jvmArguments.add('-Dorg.uberfire.nio.git.daemon.enabled=true')
 rootProject.jvmArguments.add('-Dorg.uberfire.nio.git.daemon.port=9422')
 rootProject.jvmArguments.add('-Dorg.uberfire.nio.git.ssh.enabled=false')
@@ -91,7 +86,7 @@ rootProject.jvmArguments.add('-Dorg.kie.server.location=http://localhost:8080/ki
 rootProject.jvmArguments.add('-Dorg.kie.server.id=runtime/drools/ofbiz-kie-server')
 rootProject.jvmArguments.add('-Dorg.kie.server.user=kieserver')
 rootProject.jvmArguments.add('-Dorg.kie.server.pwd=sandflower')
-rootProject.jvmArguments.add('-Dorg.kie.server.controller=http://localhost:8080/drools-wb/rest/controller')
+rootProject.jvmArguments.add('-Dorg.kie.server.controller=http://localhost:8080/kie-wb/rest/controller')
 rootProject.jvmArguments.add('-Dorg.kie.server.controller.user=kieserver')
 rootProject.jvmArguments.add('-Dorg.kie.server.controller.pwd=sandflower')
 
@@ -152,22 +147,19 @@ dependencies {
     pluginLibsCompileOnly 'org.uberfire:uberfire-metadata-backend-lucene:' + uberfireVersion
     pluginLibsCompileOnly 'org.uberfire:uberfire-metadata-backend-elasticsearch:' + uberfireVersion
     pluginLibsCompileOnly 'org.uberfire:uberfire-metadata-commons-io:' + uberfireVersion
-    pluginLibsCompileOnly 'org.dashbuilder:dashbuilder-navigation-backend:' + dashbuilderVersion
-    pluginLibsCompileOnly 'org.dashbuilder:dashbuilder-dataset-cdi:' + dashbuilderVersion
-    pluginLibsCompileOnly 'org.dashbuilder:dashbuilder-widgets:' + dashbuilderVersion
+    pluginLibsCompileOnly 'org.uberfire:uberfire-rest-backend:' + uberfireVersion
+    pluginLibsCompileOnly 'org.uberfire:uberfire-rest-client:' + uberfireVersion
+    pluginLibsCompileOnly 'org.uberfire:uberfire-nio2-jgit:' + uberfireVersion
     pluginLibsCompileOnly 'com.google.gwt:gwt-user:2.8.2'
 
     pluginLibsCompile 'org.kie:kie-tomcat-integration:' + droolsVersion
     pluginLibsCompile 'org.apache.tomcat:tomcat-util:' + tomcatVersion
     pluginLibsCompile 'javax.security.jacc:javax.security.jacc-api:1.5'
-    pluginLibsCompile 'org.eclipse.jgit:org.eclipse.jgit:4.8.0.201706111038-r'
+    pluginLibsCompile 'org.eclipse.jgit:org.eclipse.jgit:' + jgitVersion
+    pluginLibsCompile 'org.eclipse.jgit:org.eclipse.jgit.http.server:' + jgitVersion
     
-    pluginLibsRuntime ('org.elasticsearch:elasticsearch:' + elasticsearchVersion) {
-		force true
-	}
-	pluginLibsRuntime ('org.apache.lucene:lucene-core:' + luceneVersion) {
-		force true
-	}
+    pluginLibsCompile 'org.elasticsearch:elasticsearch:' + elasticsearchVersion
+    pluginLibsRuntime 'org.elasticsearch.client:transport:' + elasticsearchVersion
 
     pluginLibsRuntime 'com.lmax:disruptor:3.4.2'
     pluginLibsRuntime 'org.apache.lucene:lucene-codecs:' + luceneVersion
@@ -182,12 +174,12 @@ dependencies {
     }
     
     pluginLibsRuntime 'org.apache.httpcomponents:httpcore-nio:4.4.5'
-    pluginLibsRuntime 'com.google.guava:guava-gwt:20.0'
+    pluginLibsRuntime 'com.google.guava:guava-gwt:25.0-jre'
     pluginLibsRuntime 'org.apache.xmlgraphics:batik-codec:1.9.1'
     pluginLibsRuntime 'javax.activation:activation:1.1.1'
     pluginLibsRuntime 'net.bytebuddy:byte-buddy:1.8.17'
     
-    pluginLibsRuntime 'com.google.elemental2:elemental2-dom:1.0.0-beta-1'
+    pluginLibsRuntime 'com.google.elemental2:elemental2-dom:1.0.0-RC1'
     
     pluginLibsRuntime 'org.owasp.encoder:encoder:1.2'
     pluginLibsRuntime 'com.google.inject:guice:4.0:no_aop'
@@ -198,18 +190,22 @@ dependencies {
     
     pluginLibsRuntime 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:' + jacksonVersion
     
+    pluginLibsRuntime 'org.codehaus.jackson:jackson-core-asl:' + codehausJacksonVersion
+    pluginLibsRuntime 'org.codehaus.jackson:jackson-mapper-asl:' + codehausJacksonVersion
+    pluginLibsRuntime 'org.codehaus.jackson:jackson-jaxrs:' + codehausJacksonVersion
+    pluginLibsRuntime 'org.codehaus.jackson:jackson-xc:' + codehausJacksonVersion
+    
     pluginLibsRuntime 'org.jdom:jdom:1.1.3'
     pluginLibsRuntime 'org.jgroups:jgroups:3.6.14.Final'
     pluginLibsRuntime 'joda-time:joda-time:2.9.7'
     pluginLibsRuntime 'org.json:json:20090211'
 
     pluginLibsRuntime 'org.apache.maven:maven-embedder:3.3.9'
-    pluginLibsRuntime 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     
     pluginLibsRuntime 'org.eclipse:org.eclipse.bpmn2:0.8.2-jboss'
-
+    
     pluginLibsRuntime 'org.jasypt:jasypt:1.9.2'
-
+    
     pluginLibsRuntime 'org.jboss.classfilewriter:jboss-classfilewriter:1.2.1.Final'
     pluginLibsRuntime 'org.jboss.spec.javax.ejb:jboss-ejb-api_3.2_spec:1.0.0.Final'
     pluginLibsRuntime 'org.jboss.spec.javax.interceptor:jboss-interceptors-api_1.2_spec:1.0.0.Final'
@@ -218,8 +214,10 @@ dependencies {
         exclude group: 'org.jboss.spec.javax.el'
         exclude group: 'org.jboss.spec.javax.servlet'
     }
-	pluginLibsRuntime 'org.jboss.spec.javax.ws.rs:jboss-jaxrs-api_2.0_spec:1.0.1.Final'
-
+    pluginLibsRuntime ('org.jboss.spec.javax.ws.rs:jboss-jaxrs-api_2.0_spec:1.0.1.Final') {
+        force true
+    }
+    
     pluginLibsRuntime 'org.jboss.resteasy:resteasy-jaxrs:' + resteasyVersion
     pluginLibsRuntime 'org.jboss.resteasy:resteasy-jackson-provider:' + resteasyVersion
     pluginLibsRuntime 'org.jboss.resteasy:resteasy-jaxb-provider:' + resteasyVersion
@@ -227,9 +225,9 @@ dependencies {
     pluginLibsRuntime 'org.apache.johnzon:johnzon-core:0.9.5'
     pluginLibsRuntime 'org.jboss.forge.roaster:roaster-jdt:2.19.5.Final'
     
-    pluginLibsRuntime 'org.apache.mina:mina-core:2.0.14'
-    pluginLibsRuntime 'io.netty:netty-transport-native-epoll:4.1.22.Final:linux-x86_64'
-    pluginLibsRuntime 'io.netty:netty-transport-native-kqueue:4.1.22.Final:osx-x86_64'
+    pluginLibsRuntime 'org.apache.mina:mina-core:2.0.15'
+    pluginLibsRuntime 'io.netty:netty-transport-native-epoll:4.1.16.Final:linux-x86_64'
+    pluginLibsRuntime 'io.netty:netty-transport-native-kqueue:4.1.16.Final:osx-x86_64'
     
     pluginLibsRuntime 'org.osgi:org.osgi.compendium:4.3.1'
     pluginLibsRuntime 'org.osgi:org.osgi.core:4.3.1'
@@ -263,16 +261,17 @@ dependencies {
     pluginLibsRuntime 'org.codehaus.janino:janino:2.5.15'
     pluginLibsRuntime 'org.jboss.narayana.tomcat:tomcat-jta:5.6.4.Final'
     
-	pluginLibsRuntime 'org.apache.activemq:artemis-jms-client:2.3.0'
-	pluginLibsRuntime 'net.sf.jopt-simple:jopt-simple:5.0.2'
     pluginLibsRuntime 'org.javassist:javassist:' + javassistVersion
     
     pluginLibsRuntime 'javax.websocket:javax.websocket-api:1.1'
+    pluginLibsRuntime 'de.benediktmeurer.gwt-slf4j:gwt-slf4j:0.0.2'
+
+//    pluginLibsRuntime 'org.keycloak:keycloak-core:4.8.3.Final'
     
-    pluginLibsRuntime 'org.apache.logging.log4j:log4j-1.2-api:2.10.0' // for external jars using the old log4j1.2: routes logging to log4j 2
-    pluginLibsRuntime 'org.apache.logging.log4j:log4j-core:2.10.0' // the implementation of the log4j 2 API
-    pluginLibsRuntime 'org.apache.logging.log4j:log4j-jul:2.10.0' // for external jars using the java.util.logging: routes logging to log4j 2
-    pluginLibsRuntime 'org.apache.logging.log4j:log4j-slf4j-impl:2.10.0' // for external jars using slf4j: routes logging to log4j 2
+    pluginLibsRuntime 'org.kie.server:kie-server-services-openshift:' + droolsVersion
+    pluginLibsRuntime 'org.infinispan:infinispan-client-hotrod:' + infinispanVersion
+    pluginLibsRuntime 'org.infinispan:infinispan-query-dsl:' + infinispanVersion
+    pluginLibsRuntime 'org.infinispan:infinispan-remote-query-client:' + infinispanVersion
 }
 
 buildDir = '../../build'
@@ -280,7 +279,7 @@ buildDir = '../../build'
 rootProject.jar.exclude('org/langhua/ofbiz/drools/security/**')
 rootProject.jar.exclude('org/langhua/ofbiz/tomcat/**')
 rootProject.jar.exclude('org/kie/server/**')
-rootProject.jar.exclude('org/uberfire/ext/**')
+rootProject.jar.exclude('org/uberfire/**')
  
 task copyKieClasses(type: Copy) {
     from ('../../build/classes/java/main') {
@@ -290,9 +289,9 @@ task copyKieClasses(type: Copy) {
 
     from ('../../build/classes/java/main') {
         include 'org/kie/server/**'
-        include 'org/uberfire/ext/**'
+        include 'org/uberfire/**'
     }
-    destinationDir = file('webapp/drools-wb-' + droolsVersion + '/WEB-INF/classes')
+    destinationDir = file('webapp/business-central-' + droolsVersion + '/WEB-INF/classes')
 }
 
 task ofbizDroolsJar(type: Jar) {
@@ -310,7 +309,7 @@ task ofbizDroolsJar(type: Jar) {
     from ('src/main/resources') {
         include '**/beans.xml'
     }
-    destinationDir = file('webapp/drools-wb-' + droolsVersion + '/WEB-INF/lib')
+    destinationDir = file('webapp/business-central-' + droolsVersion + '/WEB-INF/lib')
 }
 
 rootProject.jar.dependsOn(copyKieClasses, ofbizDroolsJar)

@@ -83,7 +83,7 @@ public class OFBizUserDatabase implements UserDatabase {
     public OFBizUserDatabase(String delegatorName) {
         this.delegatorName = delegatorName;
         this.delegator = DelegatorFactory.getDelegator(delegatorName);
-        this.dispatcher = ServiceDispatcher.getLocalDispatcher("main", this.delegator);
+        this.dispatcher = ServiceDispatcher.getLocalDispatcher("webtools", this.delegator);
     }
 
     /**
@@ -128,6 +128,7 @@ public class OFBizUserDatabase implements UserDatabase {
      */
     @Override
     public Iterator<Role> getRoles() {
+    	System.out.println("--1--getRoles");
         List<Role> roles = new ArrayList<Role>();
         try {
             List<GenericValue> roleValues = EntityQuery.use(delegator)

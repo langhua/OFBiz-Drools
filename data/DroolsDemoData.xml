@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entity-engine-xml>
+    <UserLoginSecurityGroup groupId="DROOLS_ADMIN" userLoginId="admin" fromDate="2001-01-01 12:00:00.0"/>
     <Party partyId="analyst" partyTypeId="PERSON" statusId="PARTY_ENABLED"/>
-    <UserLogin userLoginId="analyst" partyId="analyst" currentPassword="{SHA}ae982ceae1a1e670397936d2984e27f288de1731" />
+    <UserLogin userLoginId="analyst" partyId="analyst" currentPassword="{PBKDF2-SHA256}10000$WzEyNSwgLTkxLCAtMzgsIDcsIC0xNywgMTAyLCA4MSwgLTIyLCAtMTEyLCA2LCA4OSwgLTkyLCA1NCwgNzQsIC0xOCwgLTkxXQ==$NDMi+/dx0cM+U0tlc2e7r0lJnrjWrnCfUmG35NE8Oz4=" />
     <UserLoginSecurityGroup groupId="DROOLS_ANALYST" userLoginId="analyst" fromDate="2001-01-01 12:00:00.0"/>
     <UserLoginSecurityGroup groupId="DROOLS_RESTALL" userLoginId="admin" fromDate="2001-01-01 12:00:00.0"/>
 </entity-engine-xml>

@@ -20,10 +20,10 @@ import java.util.Collection;
 import java.util.Date;
 
 import org.apache.lucene.document.Field;
-import org.apache.lucene.document.DoubleField;
-import org.apache.lucene.document.FloatField;
-import org.apache.lucene.document.IntField;
-import org.apache.lucene.document.LongField;
+import org.apache.lucene.document.DoublePoint;
+import org.apache.lucene.document.FloatPoint;
+import org.apache.lucene.document.IntPoint;
+import org.apache.lucene.document.LongPoint;
 import org.apache.lucene.document.SortedDocValuesField;
 import org.apache.lucene.document.StoredField;
 import org.apache.lucene.document.StringField;
@@ -80,9 +80,8 @@ public class SimpleFieldFactory implements FieldFactory {
 
         if (property.getValue().getClass() == Integer.class) {
             if (property.isSearchable()) {
-                return new IndexableField[]{new IntField(property.getName(),
-                                                         (Integer) property.getValue(),
-                                                         Field.Store.YES)};
+                return new IndexableField[]{new IntPoint(property.getName(),
+                                                         (Integer) property.getValue())};
             }
             return new IndexableField[]{new StoredField(property.getName(),
                                                         (Integer) property.getValue())};
@@ -90,9 +89,8 @@ public class SimpleFieldFactory implements FieldFactory {
 
         if (property.getValue().getClass() == Long.class) {
             if (property.isSearchable()) {
-                return new IndexableField[]{new LongField(property.getName(),
-                                                          (Long) property.getValue(),
-                                                          Field.Store.YES)};
+                return new IndexableField[]{new LongPoint(property.getName(),
+                                                          (Long) property.getValue())};
             }
             return new IndexableField[]{new StoredField(property.getName(),
                                                         (Long) property.getValue())};
@@ -100,9 +98,8 @@ public class SimpleFieldFactory implements FieldFactory {
 
         if (property.getValue().getClass() == Double.class) {
             if (property.isSearchable()) {
-                return new IndexableField[]{new DoubleField(property.getName(),
-                                                            (Double) property.getValue(),
-                                                            Field.Store.YES)};
+                return new IndexableField[]{new DoublePoint(property.getName(),
+                                                            (Double) property.getValue())};
             }
             return new IndexableField[]{new StoredField(property.getName(),
                                                         (Double) property.getValue())};
@@ -110,9 +107,8 @@ public class SimpleFieldFactory implements FieldFactory {
 
         if (property.getValue().getClass() == Float.class) {
             if (property.isSearchable()) {
-                return new IndexableField[]{new FloatField(property.getName(),
-                                                           (Float) property.getValue(),
-                                                           Field.Store.YES)};
+                return new IndexableField[]{new FloatPoint(property.getName(),
+                                                           (Float) property.getValue())};
             }
             return new IndexableField[]{new StoredField(property.getName(),
                                                         (Float) property.getValue())};
@@ -120,9 +116,8 @@ public class SimpleFieldFactory implements FieldFactory {
 
         if (FileTime.class.isAssignableFrom(property.getValue().getClass())) {
             if (property.isSearchable()) {
-                return new IndexableField[]{new LongField(property.getName(),
-                                                          ((FileTime) property.getValue()).toMillis(),
-                                                          Field.Store.YES)};
+                return new IndexableField[]{new LongPoint(property.getName(),
+                                                          ((FileTime) property.getValue()).toMillis())};
             }
             return new IndexableField[]{new StoredField(property.getName(),
                                                         ((FileTime) property.getValue()).toMillis())};
@@ -130,9 +125,8 @@ public class SimpleFieldFactory implements FieldFactory {
 
         if (Date.class.isAssignableFrom(property.getValue().getClass())) {
             if (property.isSearchable()) {
-                return new IndexableField[]{new LongField(property.getName(),
-                                                          ((Date) property.getValue()).getTime(),
-                                                          Field.Store.YES)};
+                return new IndexableField[]{new LongPoint(property.getName(),
+                                                          ((Date) property.getValue()).getTime())};
             }
             return new IndexableField[]{new StoredField(property.getName(),
                                                         ((Date) property.getValue()).getTime())};

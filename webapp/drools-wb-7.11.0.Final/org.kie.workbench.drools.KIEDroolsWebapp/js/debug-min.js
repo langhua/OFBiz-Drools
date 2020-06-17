@@ -1,2 +1,0 @@
-loadFirebugConsole();
-ORYX_LOGLEVEL=ORYX_LOGLEVEL_DEBUG;

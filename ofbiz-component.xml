@@ -5,8 +5,8 @@
     <!-- define resource loaders; most common is to use the component resource loader -->
     <resource-loader name="main" type="component"/>
 
-    <classpath type="dir" location="lib"/>
     <classpath type="dir" location="config"/>
+    <classpath type="dir" location="lib"/>
 
     <!-- entity resources: model(s), eca(s), group, and data definitions -->
     <entity-resource type="model" reader-name="main" loader="main" location="entitydef/entitymodel_userrole.xml"/>
@@ -20,15 +20,14 @@
     <webapp name="kie-server"
         title="Kie Execution Server"
         server="default-server"
-        location="webapp/kie-server-7.11.0.Final"
+        location="webapp/kie-server-7.17.0.Final"
         mount-point="/kie-server"
         app-bar-display="false"/>
 
-    <webapp name="drools-wb"
-        title="Drools Workbench"
+    <webapp name="kie-wb"
+        title="Kie Workbench"
         server="default-server"
-        location="webapp/drools-wb-7.11.0.Final"
-        mount-point="/drools-wb"
+        location="webapp/business-central-7.17.0.Final"
+        mount-point="/kie-wb"
         app-bar-display="false"/>
-
 </ofbiz-component>
