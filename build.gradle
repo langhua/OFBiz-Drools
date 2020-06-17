@@ -174,7 +174,7 @@ dependencies {
     }
     
     pluginLibsRuntime 'org.apache.httpcomponents:httpcore-nio:4.4.5'
-    pluginLibsRuntime 'com.google.guava:guava-gwt:25.0-jre'
+    pluginLibsRuntime 'com.google.guava:guava-gwt:20.0'
     pluginLibsRuntime 'org.apache.xmlgraphics:batik-codec:1.9.1'
     pluginLibsRuntime 'javax.activation:activation:1.1.1'
     pluginLibsRuntime 'net.bytebuddy:byte-buddy:1.8.17'
