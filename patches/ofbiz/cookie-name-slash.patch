@@ -1,13 +1,13 @@
-Index: framework/webapp/src/main/java/org/apache/ofbiz/webapp/control/LoginWorker.java
-===================================================================
---- framework/webapp/src/main/java/org/apache/ofbiz/webapp/control/LoginWorker.java	(revision 78)
-+++ framework/webapp/src/main/java/org/apache/ofbiz/webapp/control/LoginWorker.java	(working copy)
-@@ -716,7 +716,7 @@
+diff --git a/framework/webapp/src/main/java/org/apache/ofbiz/webapp/control/LoginWorker.java b/framework/webapp/src/main/java/org/apache/ofbiz/webapp/control/LoginWorker.java
+index be8ca2c..e6a9b07 100644
+--- a/framework/webapp/src/main/java/org/apache/ofbiz/webapp/control/LoginWorker.java
++++ b/framework/webapp/src/main/java/org/apache/ofbiz/webapp/control/LoginWorker.java
+@@ -731,7 +731,7 @@
      }
  
      protected static String getAutoLoginCookieName(HttpServletRequest request) {
 -        return UtilHttp.getApplicationName(request) + ".autoUserLoginId";
-+        return UtilHttp.getApplicationName(request).replaceAll("/", ".") + ".autoUserLoginId";
++       return UtilHttp.getApplicationName(request).replaceAll("/", ".") + ".autoUserLoginId";
      }
  
      public static String getAutoUserLoginId(HttpServletRequest request) {

@@ -1,5 +1,5 @@
 diff --git a/business-central-parent/business-central-distribution-wars/business-central/pom.xml b/business-central-parent/business-central-distribution-wars/business-central/pom.xml
-index 9efedbd..37944f4 100644
+index a787c43..07c66ee 100644
 --- a/business-central-parent/business-central-distribution-wars/business-central/pom.xml
 +++ b/business-central-parent/business-central-distribution-wars/business-central/pom.xml
 @@ -63,6 +63,20 @@
@@ -488,10 +488,10 @@ index 0000000..2b02c10
 +org.uberfire.ext.security.management.api.userManagementServices=OFBizUserManagementService
 diff --git a/business-central-parent/business-central-distribution-wars/src/main/ofbiz/WEB-INF/web.xml b/business-central-parent/business-central-distribution-wars/src/main/ofbiz/WEB-INF/web.xml
 new file mode 100644
-index 0000000..00357b7
+index 0000000..234ea2f
 --- /dev/null
 +++ b/business-central-parent/business-central-distribution-wars/src/main/ofbiz/WEB-INF/web.xml
-@@ -0,0 +1,552 @@
+@@ -0,0 +1,542 @@
 +<?xml version="1.0" encoding="UTF-8"?>
 +<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
 +         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -633,16 +633,6 @@ index 0000000..00357b7
 +    <url-pattern>/rest/*</url-pattern>
 +    <url-pattern>/maven2/*</url-pattern>
 +    <url-pattern>/ws/*</url-pattern>
-+  </filter-mapping>
-+
-+  <filter>
-+    <filter-name>GzipFilter</filter-name>
-+    <filter-class>org.uberfire.backend.server.util.gzip.GzipFilter</filter-class>
-+  </filter>
-+
-+  <filter-mapping>
-+    <filter-name>GzipFilter</filter-name>
-+    <url-pattern>*.js</url-pattern>
 +  </filter-mapping>
 +
 +  <!-- RESTEasy configurations -->

@@ -1,8 +1,8 @@
 diff --git a/kie-wb-common-screens/kie-wb-common-examples-screen/kie-wb-common-examples-screen-backend/src/main/java/org/kie/workbench/common/screens/examples/backend/server/ExamplesServiceImpl.java b/kie-wb-common-screens/kie-wb-common-examples-screen/kie-wb-common-examples-screen-backend/src/main/java/org/kie/workbench/common/screens/examples/backend/server/ExamplesServiceImpl.java
-index 500c533..3fbf7b1 100644
+index 1c3be26..2f44bca 100644
 --- a/kie-wb-common-screens/kie-wb-common-examples-screen/kie-wb-common-examples-screen-backend/src/main/java/org/kie/workbench/common/screens/examples/backend/server/ExamplesServiceImpl.java
 +++ b/kie-wb-common-screens/kie-wb-common-examples-screen/kie-wb-common-examples-screen-backend/src/main/java/org/kie/workbench/common/screens/examples/backend/server/ExamplesServiceImpl.java
-@@ -121,7 +121,10 @@
+@@ -122,7 +122,10 @@
      @PostConstruct
      public void initPlaygroundRepository() {
          try {

@@ -1,21 +1,9 @@
-diff --git a/kie-server-parent/kie-server-wars/kie-server/pom.xml b/kie-server-parent/kie-server-wars/kie-server/pom.xml
-index c2d76d6..cef330e 100644
---- a/kie-server-parent/kie-server-wars/kie-server/pom.xml
-+++ b/kie-server-parent/kie-server-wars/kie-server/pom.xml
-@@ -317,6 +317,7 @@
-           <descriptors>
-             <descriptor>src/main/assembly/assembly-ee7-container.xml</descriptor>
-             <descriptor>src/main/assembly/assembly-servlet-container.xml</descriptor>
-+            <descriptor>src/main/assembly/assembly-ofbiz-webapp.xml</descriptor>
-           </descriptors>
-           <archive>
-             <addMavenDescriptor>false</addMavenDescriptor>
 diff --git a/kie-server-parent/kie-server-wars/kie-server/src/main/assembly/assembly-ofbiz-webapp.xml b/kie-server-parent/kie-server-wars/kie-server/src/main/assembly/assembly-ofbiz-webapp.xml
 new file mode 100644
-index 0000000..ed08ad0
+index 0000000..7262555
 --- /dev/null
 +++ b/kie-server-parent/kie-server-wars/kie-server/src/main/assembly/assembly-ofbiz-webapp.xml
-@@ -0,0 +1,95 @@
+@@ -0,0 +1,94 @@
 +<?xml version="1.0" encoding="UTF-8"?>
 +<!--
 +  ~ Copyright 2012 Red Hat, Inc. and/or its affiliates
@@ -40,7 +28,6 @@ index 0000000..ed08ad0
 +  <!-- including a . in the id will modify the *classifier* of the artifact, instead of the name/id of the artifact -->
 +  <id>ofbiz</id>
 +  <formats>
-+    <format>war</format>
 +    <format>dir</format>
 +  </formats>
 +
@@ -159,15 +146,15 @@ index 0000000..b332d30
 \ No newline at end of file
 diff --git a/kie-server-parent/kie-server-wars/kie-server/src/main/ofbiz-resources/WEB-INF/web.xml b/kie-server-parent/kie-server-wars/kie-server/src/main/ofbiz-resources/WEB-INF/web.xml
 new file mode 100644
-index 0000000..374b518
+index 0000000..abda0ae
 --- /dev/null
 +++ b/kie-server-parent/kie-server-wars/kie-server/src/main/ofbiz-resources/WEB-INF/web.xml
 @@ -0,0 +1,72 @@
 +<?xml version="1.0" encoding="UTF-8"?>
 +<web-app xmlns="http://java.sun.com/xml/ns/javaee"
 +         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-+         version="2.5"
-+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
++         version="3.0"
++         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 +  <display-name>KieServer</display-name>
 +  <listener>
 +    <listener-class>org.jboss.narayana.tomcat.jta.NarayanaJtaServletContextListener</listener-class>

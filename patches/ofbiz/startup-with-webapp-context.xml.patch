@@ -1,9 +1,25 @@
-### Eclipse Workspace Patch 1.0
-Index: framework/catalina/src/main/java/org/apache/ofbiz/catalina/container/CatalinaContainer.java
-===================================================================
---- framework/catalina/src/main/java/org/apache/ofbiz/catalina/container/CatalinaContainer.java (revision 1877905)
-+++ framework/catalina/src/main/java/org/apache/ofbiz/catalina/container/CatalinaContainer.java (working copy)
-@@ -49,6 +49,7 @@
+diff --git a/framework/catalina/src/main/java/org/apache/ofbiz/catalina/container/CatalinaContainer.java b/framework/catalina/src/main/java/org/apache/ofbiz/catalina/container/CatalinaContainer.java
+index d300b70..8b64183 100644
+--- a/framework/catalina/src/main/java/org/apache/ofbiz/catalina/container/CatalinaContainer.java
++++ b/framework/catalina/src/main/java/org/apache/ofbiz/catalina/container/CatalinaContainer.java
+@@ -20,6 +20,8 @@
+ 
+ import java.io.File;
+ import java.io.IOException;
++import java.net.MalformedURLException;
++import java.net.URL;
+ import java.util.ArrayList;
+ import java.util.Collections;
+ import java.util.HashSet;
+@@ -33,7 +35,6 @@
+ 
+ import javax.naming.InitialContext;
+ import javax.naming.NamingException;
+-
+ import org.apache.catalina.Context;
+ import org.apache.catalina.Engine;
+ import org.apache.catalina.Globals;
+@@ -51,6 +52,7 @@
  import org.apache.catalina.ha.tcp.ReplicationValve;
  import org.apache.catalina.ha.tcp.SimpleTcpCluster;
  import org.apache.catalina.loader.WebappLoader;
@@ -11,18 +27,23 @@ Index: framework/catalina/src/main/java/org/apache/ofbiz/catalina/container/Cata
  import org.apache.catalina.startup.ContextConfig;
  import org.apache.catalina.startup.Tomcat;
  import org.apache.catalina.tribes.group.GroupChannel;
-@@ -74,6 +75,7 @@
+@@ -68,9 +70,11 @@
+ import org.apache.ofbiz.base.container.ContainerConfig.Configuration;
+ import org.apache.ofbiz.base.container.ContainerConfig.Configuration.Property;
+ import org.apache.ofbiz.base.container.ContainerException;
++import org.apache.ofbiz.base.location.FlexibleLocation;
  import org.apache.ofbiz.base.start.Start;
  import org.apache.ofbiz.base.start.StartupCommand;
  import org.apache.ofbiz.base.util.Debug;
 +import org.apache.ofbiz.base.util.FileUtil;
- import org.apache.ofbiz.base.util.SSLUtil;
  import org.apache.ofbiz.base.util.UtilValidate;
- import org.apache.ofbiz.base.util.UtilXml;
-@@ -543,7 +545,25 @@
-         context.setDocBase(location);
-         context.setPath(mount);
-         context.addLifecycleListener(new ContextConfig());
+ import org.apache.ofbiz.entity.util.EntityUtilProperties;
+ import org.apache.ofbiz.webapp.WebAppUtil;
+@@ -495,9 +499,26 @@
+             ComponentConfig.WebappInfo appInfo, Property clusterProp) throws ContainerException {
+ 
+         StandardContext context = new StandardContext();
++        String location = getWebappRootLocation(appInfo);
 +
 +        String contextXmlFilePath = new StringBuilder().append("file:///").append(location).append("/").append(Constants.ApplicationContextXml).toString();
 +        URL contextXmlUrl = null;
@@ -39,9 +60,10 @@ Index: framework/catalina/src/main/java/org/apache/ofbiz/catalina/container/Cata
 +        } catch (MalformedURLException e) {
 +            Debug.logInfo(contextXmlFilePath+ " not found.", module);
 +        }
-+        
-         Tomcat.initWebappDefaults(context);
 +
-         // configure persistent sessions
-         // important: the call to context.setManager(...) must be done after Tomcat.initWebappDefaults(...)
-         Property clusterProp = clusterConfig.get(engine.getName());
+         Tomcat.initWebappDefaults(context);
+ 
+-        String location = getWebappRootLocation(appInfo);
+         boolean contextIsDistributable = isContextDistributable(configuration, appInfo);
+ 
+         context.setParent(host);
