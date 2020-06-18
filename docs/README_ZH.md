@@ -22,7 +22,7 @@ OFBiz Drools插件把[kie drools工作台](https://github.com/kiegroup/kie-wb-di
 
 ### 快速使用
 
-**1. 从http://svn.apache.org/repos/asf/ofbiz/tags/REL-16.11.07检出OFBiz 16.11.07**
+**1. 从https://github.com/apache/ofbiz-framework检出OFBiz 17.12.03**
 
 <br/>
 
@@ -38,10 +38,10 @@ OFBiz Drools插件把[kie drools工作台](https://github.com/kiegroup/kie-wb-di
 
 <br/>
 
-**5. 下载和安装gradle 4.9。如果你使用gradlew命令，请编辑gradle/wrapper/gradle-wrapper.properties文件，修改为使用gradle 4.9:**
+**5. 下载和安装gradle 5.6。如果你使用gradlew命令，请编辑gradle/wrapper/gradle-wrapper.properties文件，修改为使用gradle 5.6:**
 
 ```
-distributionUrl=https\://services.gradle.org/distributions/gradle-4.9-bin.zip
+distributionUrl=https\://services.gradle.org/distributions/gradle-5.6-bin.zip
 ```
 
 <br/>
@@ -49,7 +49,7 @@ distributionUrl=https\://services.gradle.org/distributions/gradle-4.9-bin.zip
 **6. 通过下面的命令来安装OFBiz种子数据:**
 
 ```
-gradle loadDefault
+gradle loadAll
 ```
 
 <br/>
@@ -70,11 +70,11 @@ gradle ofbiz
 
 登录成功后，你可以看到如下图所示的Kie Server信息。
 
-![kie server](images/sandflower-kie-server.png)
+![kie server](images/sandflower-kie-server-7.17.0.Final.png)
 
 <br/>
 
-**9. 在浏览器中，访问https://localhost:8443/drools-wb/**
+**9. 在浏览器中，访问https://localhost:8443/kie-wb/**
 
 用户名: admin
 
@@ -90,7 +90,7 @@ gradle ofbiz
 
 **11. 在Deploy中，添加一个名为runtime/drools/ofbiz-kie-server的kie-server:**
 
-![kie controller](images/sandflower-kie-drools-wb-deploy.png)
+![kie controller](images/sandflower-kie-wb-deploy-7.17.0.Final.png)
 
 <br/>
 
@@ -132,56 +132,61 @@ gradle ofbiz
 
 ### 开发笔记
 
-**1. 如何生成本插件的webapp/drools-wb-7.11.0.Final下的那些文件**
+**1. 如何生成本插件的webapp/business-central-7.17.0.Final下的那些文件**
 
-1.1. 把kie/kie-drools-wb-distribution-wars-7.11.0.Final.patch补丁打到[kie-wb-distributions/kie-drools-wb-parent/kie-drools-wb-distribution-wars/](https://github.com/kiegroup/kie-wb-distributions/tree/7.11.0.Final/kie-drools-wb-parent/kie-drools-wb-distribution-wars)项目代码中
+1.1. 把kie/business-central-distribution-wars-7.17.0.Final.patch补丁打到[kie-wb-distributions/business-central-parent/business-central-distribution-wars/](https://github.com/kiegroup/kie-wb-distributions/tree/7.17.0.Final/business-central-parent/business-central-distribution-wars)项目代码中
 
-![apply patch to kie-drools-wb-distribution-wars](images/sandflower-kie-drools-wb-distribution-wars-patch.png)
-
-<br/>
-
-1.2. 执行mvn clean package命令来生成target/kie-drools-wb-7.11.0.Final-ofbiz，这个目录就是本插件的webapp/drools-wb-7.11.0.Final
-
-![build kie-drools-wb-7.11.0.Final-ofbiz](images/sandflower-kie-drools-wb-distribution-wars-package.png)
+![apply patch to business-central-distribution-wars](images/sandflower-business-central-distribution-wars-patch.png)
 
 <br/>
 
-**2. 如何生成本插件webapp/kie-server-7.11.0.Final下的那些文件**
+1.2. 执行mvn clean package命令来生成target/business-central-7.17.0.Final-ofbiz，这个目录就是本插件的webapp/business-central-7.17.0.Final
 
-2.1. 把kie/kie-server-7.11.0.Final.patch补丁打到[droolsjbpm-integration/kie-server-parent/kie-server-wars/kie-server/](https://github.com/kiegroup/droolsjbpm-integration/tree/7.11.0.Final/kie-server-parent/kie-server-wars/kie-server)
-
-![apply patch to kie-server](images/sandflower-kie-server-patch.png)
+![build business-central-7.17.0.Final-ofbiz](images/sandflower-business-central-distribution-wars-package.png)
 
 <br/>
 
-2.2. 执行mvn clean package命令来生成target/kie-server-7.11.0.Final-ofbiz，这个目录就是本插件的webapp/kie-server-7.11.0.Final
+**2. 如何生成本插件webapp/kie-server-7.17.0.Final下的那些文件**
 
-![build kie-server-7.11.0.Final-ofbiz](images/sandflower-kie-server-package.png)
+2.1. 把kie/kie-server-7.17.0.Final.patch补丁打到[droolsjbpm-integration/kie-server-parent/kie-server-wars/kie-server/](https://github.com/kiegroup/droolsjbpm-integration/tree/7.17.0.Final/kie-server-parent/kie-server-wars/kie-server)
+
+![apply patch to kie-server](images/sandflower-kie-server-7.17.0.Final.patch.png)
+
+<br/>
+
+2.2. 执行mvn clean package命令来生成target/kie-server-7.17.0.Final-ofbiz，这个目录就是本插件的webapp/kie-server-7.17.0.Final
+
+![build kie-server-7.17.0.Final-ofbiz](images/sandflower-kie-server-package-7.17.0.Final.png)
 
 <br/>
 
 **3. 为什么要打patches/ofbiz/startup-with-webapp-context.xml.patch补丁**
 
-如你所知，当把kie-drools-wb或kie-server部署到Tomcat下时，META-INF/context.xml会生效。在OFBiz 16.11.07，它没有生效。通过打 patches/ofbiz/startup-with-webapp-context.xml.patch补丁，META-INF/context.xml才会生效，然后认证和JSP标签才能起作用:
+如你所知，当把kie-drools-wb或kie-server部署到Tomcat下时，META-INF/context.xml会生效。在OFBiz 17.12.03，它没有生效。通过打 patches/ofbiz/startup-with-webapp-context.xml.patch补丁，META-INF/context.xml才会生效，然后认证和JSP标签才能起作用:
 
 ```java
-        String contextXmlFilePath = new StringBuilder().append("file:///").append(location).append("/").append(Constants.ApplicationContextXml).toString();
-        URL contextXmlUrl = null;
-        try {
-            contextXmlUrl = FlexibleLocation.resolveLocation(contextXmlFilePath);
-            contextXmlFilePath = new StringBuilder().append(location).append("/").append(Constants.ApplicationContextXml).toString();
-            File contextXmlFile = FileUtil.getFile(contextXmlFilePath);
-            if (contextXmlFile.exists() && contextXmlFile.isFile()) { 
-                Debug.logInfo(contextXmlFilePath + " found and will be loaded.", module);
-                context.setConfigFile(contextXmlUrl);
-            } else {
-                // Debug.logInfo(contextXmlFilePath + " not found or not a file.", module);
-            }
-        } catch (MalformedURLException e) {
-            Debug.logInfo(contextXmlFilePath+ " not found.", module);
-        }
-        
-        Tomcat.initWebappDefaults(context);
+         StandardContext context = new StandardContext();
++        String location = getWebappRootLocation(appInfo);
++
++        String contextXmlFilePath = new StringBuilder().append("file:///").append(location).append("/").append(Constants.ApplicationContextXml).toString();
++        URL contextXmlUrl = null;
++        try {
++            contextXmlUrl = FlexibleLocation.resolveLocation(contextXmlFilePath);
++            contextXmlFilePath = new StringBuilder().append(location).append("/").append(Constants.ApplicationContextXml).toString();
++            File contextXmlFile = FileUtil.getFile(contextXmlFilePath);
++            if(contextXmlFile.exists() && contextXmlFile.isFile()) { 
++                Debug.logInfo(contextXmlFilePath + " found and will be loaded.", module);
++                context.setConfigFile(contextXmlUrl);
++            } else {
++                // Debug.logInfo(contextXmlFilePath + " not found or not a file.", module);
++            }
++        } catch (MalformedURLException e) {
++            Debug.logInfo(contextXmlFilePath+ " not found.", module);
++        }
++
+         Tomcat.initWebappDefaults(context);
+ 
+-        String location = getWebappRootLocation(appInfo);
 ```
 
 context.setConfigFile(contextXmlUrl)是其中的核心语句。
@@ -190,11 +195,11 @@ context.setConfigFile(contextXmlUrl)是其中的核心语句。
 
 **4. 为什么要打patches/ofbiz/build.gradle.patch补丁**
 
-在这个补丁中，增加了两个功能，一个是把rootProject.jvmArguments暴露出来，让插件能够扩展和修改:
+在这个补丁中，把rootProject.jvmArguments暴露出来，让插件能够扩展和修改:
 
 ```groovy
 -List jvmArguments = ['-Xms128M', '-Xmx1024M']
-+ext.jvmArguments = ['-Xms128M', '-Xmx2048M']
++ext.jvmArguments = ['-Xms128M', '-Xmx1024M']
 ```
 
 在OFBiz-Drools插件的build.gradle中， rootProject.jvmArguments被扩展了:
@@ -206,13 +211,13 @@ rootProject.jvmArguments.each { jvmArg ->
         if (!jvmArg.endsWith("=")) {
             jvmArg += ","
         }
-        log4jConfig = jvmArg + "hot-deploy/drools/config/log4j2-drools.xml"
+        log4jConfig = jvmArg + "log4j2-drools.xml"
         findLogArg = true
         return true
     }
 }
 if (!findLogArg) {
-    rootProject.jvmArguments.add('-Dlog4j.configurationFile=log4j2.xml,hot-deploy/drools/config/log4j2-drools.xml')
+    rootProject.jvmArguments.add('-Dlog4j.configurationFile=log4j2.xml,log4j2-drools.xml')
 } else {
     rootProject.jvmArguments.remove(originalLog4jConfig)
     rootProject.jvmArguments.add(log4jConfig)
@@ -223,26 +228,11 @@ rootProject.jvmArguments.add('-Dorg.uberfire.nio.git.dir=runtime/drools')
 ...
 ```
 
-另一个添加的功能是pluginLibsCompileOnly，与最新版的OFBiz一致，它的含义是仅在编译时使用的依赖关系:
-
-```groovy
-+        //compile-only libraries
-+        pluginLibsCompileOnly
-...
-+        compileOnly project(path: subProject.path, configuration: 'pluginLibsCompileOnly')
-```
-
-在本插件的build.gradle中，使用pluginLibsCompileOnly:
-
-```groovy
-    pluginLibsCompileOnly 'org.jbpm:jbpm-wb-dashboard-client:' + droolsVersion
-```
-
 <br/>
 
 **5. 为什么打patches/ofbiz/cookie-name-slash.patch补丁**
 
-一个测试用例是给ofbiz-component.xml中的/drools-wb和/kie-server加前缀，如:
+一个测试用例是给ofbiz-component.xml中的/kie-wb和/kie-server加前缀，如:
 
 ```
         mount-point="/sandflower/demo/trunk/kie-server"
@@ -259,9 +249,9 @@ rootProject.jvmArguments.add('-Dorg.uberfire.nio.git.dir=runtime/drools')
 
 <br/>
 
-**6. 为什么打patches/kie/kie-wb-common-examples-screen-backend-7.11.0.Final.patch补丁**
+**6. 为什么打patches/kie/kie-wb-common-examples-screen-backend-7.17.0.Final.patch补丁**
 
-这个补丁用于[kie-wb-common-examples-screen-backend](https://github.com/kiegroup/kie-wb-common/tree/7.11.0.Final/kie-wb-common-screens/kie-wb-common-examples-screen/kie-wb-common-examples-screen-backend)，添加了一个新的系统属性org.kie.wb.common.examples.dir，它优先于user.dir属性。这是一个不重要的修改，你可以直接使用user.dir。
+这个补丁用于[kie-wb-common-examples-screen-backend](https://github.com/kiegroup/kie-wb-common/tree/7.17.0.Final/kie-wb-common-screens/kie-wb-common-examples-screen/kie-wb-common-examples-screen-backend)，添加了一个新的系统属性org.kie.wb.common.examples.dir，它优先于user.dir属性。这是一个不重要的修改，你可以直接使用user.dir。
 
 代码修改是:
 
@@ -281,11 +271,11 @@ rootProject.jvmArguments.add('-Dorg.kie.wb.common.examples.dir=runtime/drools')
 
 当运行OFBiz时，kie的样例会部署到runtime/drools/.kie-wb-playground/目录下:
 
-![kie-wb-playground](images/sandflower-kie-wb-playground.png)
+![kie-wb-playground](images/sandflower-kie-wb-playground-7.17.0.Final.png)
 
 <br/>
 
-**7. 为什么打patches/kie/kie-server-services-common-7.11.0.Final.patch补丁**
+**7. 为什么打patches/kie/kie-server-services-common-7.17.0.Final.patch补丁**
 
 本查件把缺省的kie服务器ID设置成了runtime/drools/ofbiz-kie-server:
 
@@ -295,15 +285,15 @@ rootProject.jvmArguments.add('-Dorg.kie.server.id=runtime/drools/ofbiz-kie-serve
 
 我们期望ofbiz-kie-server.xml在第一次启动时，能在runtime/drools/下自动生成，以后启动时，能从这个文件加载配置:
 
-![runtime/drools/ofbiz-kie-server.xml](images/sandflower-ofbiz-kie-server-xml.png)
+![runtime/drools/ofbiz-kie-server.xml](images/sandflower-ofbiz-kie-server-xml-7.17.0.Final.png)
 
 并且，ofbiz-kie-server应该是Kie服务器ID，这样才能在Drools工作台中控制它:
 
-![kie controller](images/sandflower-kie-drools-wb-deploy.png)
+![kie controller](images/sandflower-kie-wb-deploy-7.17.0.Final.png)
 
 上面这个场景就是创建这个补丁的原因。
 
-按照[Tomcat document](https://tomcat.apache.org/tomcat-8.5-doc/class-loader-howto.html)文档，有两个类加载方式:
+按照[Tomcat document](https://tomcat.apache.org/tomcat-9.0-doc/class-loader-howto.html)文档，有两个类加载方式:
 
 ```text
 Therefore, from the perspective of a web application, class or resource loading looks in the following repositories, in this order:
@@ -325,15 +315,15 @@ Common class loader classes (described above)
 
 如果你的OFBiz是加载类型一，不需要使用这个补丁，因为src/main/java/org/kie/server/services/impl/controller/DefaultRestControllerImpl.java编译后会被部署到/WEB-INF/classes，这个类会生效。
 
-如果你的OFBiz是加载类型二，这也是我下载的OFBiz 16.11.07的类型，这个补丁打到[droolsjbpm-integration/kie-server-parent/kie-server-services/kie-server-services-common](https://github.com/kiegroup/droolsjbpm-integration/tree/7.11.0.Final/kie-server-parent/kie-server-services/kie-server-services-common)。lib/kie-server-services-common-7.11.0.Final.jar是打了这个补丁的jar，直接使用即可。
+如果你的OFBiz是加载类型二，这也是我下载的OFBiz 17.12.03的类型，这个补丁打到[droolsjbpm-integration/kie-server-parent/kie-server-services/kie-server-services-common](https://github.com/kiegroup/droolsjbpm-integration/tree/7.17.0.Final/kie-server-parent/kie-server-services/kie-server-services-common)。lib/kie-server-services-common-7.17.0.Final.jar是打了这个补丁的jar，直接使用即可。
 
 <br/>
 
-**8. 为什么使用Gradle 4.9**
+**8. 为什么使用Gradle 5.6**
 
-gradle/wrapper/gradle-wrapper.properties中的Gradle版本是2.13，它无法正确生成ofbiz.jar中的MANIFEST.MF的Class-Path，在这里，主要是不能正确解决Lucene版本。我们知道，OFBiz启动时，使用这个Class-Path作为classpath。我偶然把2.13改成了4.9，就可以了。我猜很多比2.13高的版本都可以，但是我没有试。
+gradle/wrapper/gradle-wrapper.properties中的Gradle版本是3.2.1，它无法正确生成ofbiz.jar中的MANIFEST.MF的Class-Path，在这里，主要是不能正确解决Lucene版本。我们知道，OFBiz启动时，使用这个Class-Path作为classpath。我偶然把3.2.1改成了5.6，就可以了。我猜很多比3.2.1高的版本都可以，但是我没有试。
 
-![kie controller](images/sandflower-MANIFEST-MF.png)
+![kie controller](images/sandflower-MANIFEST-MF-17.12.03.png)
 
 <br/>
 
@@ -360,6 +350,22 @@ OFBiz build.gradle中包含了juel-impl-2.2.7.jar:
 ```
 
 这个OSGI配置导致了本插件JSP文件中的EL表达式出错，所以我把juel-impl-2.2.7.jar解压（unzip）后，删除OSGI-INFO，再重新打包（zip），把新的jar文件命名为juel-impl-no-osgi-2.2.7.jar，并放在了lib目录下。然后，JSP文件就正常了。
+
+<br/>
+
+**10. 为什么选择kie 7.17.0.Final**
+
+有以下两个原因：
+
+第一个原因是cdi-api 1.x。Kie 7.20.0.Final是最后一个支持cdi-api 1.x的版本。更新的版本，都要求支持cdi-api 2.0。在我做的测试中，在Tomcat 9.0.x下，cdi-api 2.0还无法运行。我找到了这篇文档[Tomcat cdi document](https://tomcat.apache.org/tomcat-9.0-doc/cdi.html)，我猜想要到Tomcat 9.5.x或更晚的版本，才会支持cdi-api 2.0。
+
+第二个原因是Kie 7.17.0.Final是最新的既支持cdi-api 1.x，又能够正确构建lucene索引，并在重启后继续使用这些索引的。其它版本会报锁错误：**org.apache.lucene.store.LockObtainFailedException: Lock held by this virtual machine**
+
+<br/>
+
+**11. 别忘记匹配ofbiz-plugins中的Lucene版本**
+
+[OFBiz Lucene plugin 17.12.03](https://github.com/apache/ofbiz-plugins/blob/release17.12.03/lucene/build.gradle)中的Lucene版本是7.1.0，比Kie中的版本新。我修改了src/main/java/org/uberfire/ext/下的几个文件，来匹配这个版本变化，并使用Elasticsearch 6.1.1。
 
 <br/>
 

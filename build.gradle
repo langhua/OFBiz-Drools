@@ -66,6 +66,7 @@ rootProject.configurations.runtime {
 
 // set drools runtime configurations
 rootProject.jvmArguments.add('-Dorg.uberfire.nio.git.dir=runtime/drools')
+rootProject.jvmArguments.add('-Dappformer.ssh.keys.storage.folder=runtime/drools/.security/pkeys')
 rootProject.jvmArguments.add('-Dorg.guvnor.m2repo.dir=runtime/drools/repositories')
 rootProject.jvmArguments.add('-Dorg.uberfire.metadata.index.dir=runtime/drools')
 rootProject.jvmArguments.add('-Dorg.uberfire.async.executor.safemode=true')
@@ -136,7 +137,7 @@ dependencies {
     pluginLibsRuntime 'org.kie.server:kie-server-controller-api:' + droolsVersion
     pluginLibsRuntime 'org.kie.server:kie-server-controller-websocket-common:' + droolsVersion
     pluginLibsRuntime 'org.kie.server:kie-server-controller-websocket-client:' + droolsVersion
-    
+	
     pluginLibsRuntime 'org.optaplanner:optaplanner-persistence-jaxb:' + droolsVersion
     pluginLibsRuntime 'org.optaplanner:optaplanner-workbench-models-datamodel-api:' + droolsVersion
 
