@@ -1,8 +1,8 @@
 diff --git a/framework/webapp/src/main/java/org/apache/ofbiz/webapp/control/LoginWorker.java b/framework/webapp/src/main/java/org/apache/ofbiz/webapp/control/LoginWorker.java
-index be8ca2c..e6a9b07 100644
+index 9fe1f7f..8731a8d 100644
 --- a/framework/webapp/src/main/java/org/apache/ofbiz/webapp/control/LoginWorker.java
 +++ b/framework/webapp/src/main/java/org/apache/ofbiz/webapp/control/LoginWorker.java
-@@ -731,7 +731,7 @@
+@@ -985,11 +985,11 @@
      }
  
      protected static String getAutoLoginCookieName(HttpServletRequest request) {
@@ -10,4 +10,9 @@ index be8ca2c..e6a9b07 100644
 +       return UtilHttp.getApplicationName(request).replaceAll("/", ".") + ".autoUserLoginId";
      }
  
+     protected static String getSecuredLoginIdCookieName(HttpServletRequest request) {
+-        return UtilHttp.getApplicationName(request) + ".securedLoginId";
++        return UtilHttp.getApplicationName(request).replaceAll("/", ".") + ".securedLoginId";
+     }
+     
      public static String getAutoUserLoginId(HttpServletRequest request) {

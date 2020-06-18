@@ -22,7 +22,7 @@ Welcome any kind of contributions to this plugin.
 
 ### Quick Start
 
-**1. Checkout OFBiz 17.12.03 from https://github.com/apache/ofbiz-framework**
+**1. Checkout OFBiz 18.12 from https://github.com/apache/ofbiz-framework**
 
 <br/>
 
@@ -38,7 +38,7 @@ Welcome any kind of contributions to this plugin.
 
 <br/>
 
-**5. Download gradle 5.6 and install. If you use gradlew, please edit gradle/wrapper/gradle-wrapper.properties, change to use gradle 5.6:**
+**5. Gradle 5.0 is OK in my environment. If not in yours, please edit gradle/wrapper/gradle-wrapper.properties, change to use gradle 5.6:**
 
 ```
 distributionUrl=https\://services.gradle.org/distributions/gradle-5.6-bin.zip
@@ -164,7 +164,7 @@ and check a specific container status, i.e. mortgages:mortgages:1.0.0-SNAPSHOT, 
 
 **3. Why apply patches/ofbiz/startup-with-webapp-context.xml.patch**
 
-As you see, when deploying kie-drools-wb or kie-server in tomcat, the META-INF/context.xml is applied. In OFBiz 17.12.03, it's not. With patches/ofbiz/startup-with-webapp-context.xml.patch, META-INF/context.xml is configured, and then authz and taglibs can work as expected:
+As you see, when deploying kie-drools-wb or kie-server in tomcat, the META-INF/context.xml is applied. In OFBiz 18.12, it's not. With patches/ofbiz/startup-with-webapp-context.xml.patch, META-INF/context.xml is configured, and then authz and taglibs can work as expected:
 
 ```java
          StandardContext context = new StandardContext();
@@ -323,15 +323,13 @@ Common class loader classes (described above)
 
 If your OFBiz is class loader type one, this patch is unnecessary as src/main/java/org/kie/server/services/impl/controller/DefaultRestControllerImpl.java will be built and deployed under /WEB-INF/classes.
 
-If your OFBiz is type two and this is what I see in OFBiz 17.12.03, the patch can be applied to [droolsjbpm-integration/kie-server-parent/kie-server-services/kie-server-services-common](https://github.com/kiegroup/droolsjbpm-integration/tree/7.17.0.Final/kie-server-parent/kie-server-services/kie-server-services-common). The lib/kie-server-services-common-7.17.0.Final.jar is built with this patch.
+If your OFBiz is type two and this is what I see in OFBiz 18.12, the patch can be applied to [droolsjbpm-integration/kie-server-parent/kie-server-services/kie-server-services-common](https://github.com/kiegroup/droolsjbpm-integration/tree/7.17.0.Final/kie-server-parent/kie-server-services/kie-server-services-common). The lib/kie-server-services-common-7.17.0.Final.jar is built with this patch.
 
 <br/>
 
-**8. Why gradle 5.6**
+**8. Gradle 5.0**
 
-The gradle version in gradle/wrapper/gradle-wrapper.properties is 3.2.1. It has a problem to download files required by drools plugin properly and build Class-Path of MANIFEST.MF for ofbiz.jar correctly. In this case, it cannot resolve lucene version as expected. As we know, OFBiz use this Class-Path as classpath when starting. I happen to change 3.2.1 to 5.6 and it's ok. I guess many other gradle versions also work fine but I didn't try.
-
-![MANIFEST](docs/images/sandflower-MANIFEST-MF-17.12.03.png)
+The gradle version in gradle/wrapper/gradle-wrapper.properties is 5.0, it works fine in my environment. If you have problem to download files required by drools plugin or generate wrong Class-Path of MANIFEST.MF for ofbiz.jar, you can try gradle 5.6.
 
 <br/>
 
@@ -373,7 +371,7 @@ The 2nd reason is kie 7.17.0.Final is the latest version support cdi-api 1.x whi
 
 **11. Don't forget to match Elasticsearch and Lucene version with ofbiz-plugins**
 
-The lucene version in [OFBiz Lucene plugin 17.12.03](https://github.com/apache/ofbiz-plugins/blob/release17.12.03/lucene/build.gradle) is 7.1.0, which is newer than the version in kie, I changed several java files under src/main/java/org/uberfire/ext/ to match this version upgrade, and use Elasticsearch 6.1.1 accordingly.
+The lucene version in [OFBiz Lucene plugin 18.12](https://github.com/apache/ofbiz-plugins/blob/release18.12/lucene/build.gradle) is 7.5.0, which is newer than the version in kie, I changed several java files under src/main/java/org/uberfire/ext/ to match this version upgrade, and use Elasticsearch 6.5.1 accordingly.
 
 <br/>
 

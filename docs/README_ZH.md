@@ -22,7 +22,7 @@ OFBiz Drools插件把[kie drools工作台](https://github.com/kiegroup/kie-wb-di
 
 ### 快速使用
 
-**1. 从https://github.com/apache/ofbiz-framework检出OFBiz 17.12.03**
+**1. 从https://github.com/apache/ofbiz-framework检出OFBiz 18.12**
 
 <br/>
 
@@ -38,7 +38,7 @@ OFBiz Drools插件把[kie drools工作台](https://github.com/kiegroup/kie-wb-di
 
 <br/>
 
-**5. 下载和安装gradle 5.6。如果你使用gradlew命令，请编辑gradle/wrapper/gradle-wrapper.properties文件，修改为使用gradle 5.6:**
+**5. 在我的开发环境里，Gradle 5.0可以正常使用。如果在你的环境下不行，可以试试Gradle 5.6，请编辑gradle/wrapper/gradle-wrapper.properties文件，修改为使用gradle 5.6:**
 
 ```
 distributionUrl=https\://services.gradle.org/distributions/gradle-5.6-bin.zip
@@ -162,7 +162,7 @@ gradle ofbiz
 
 **3. 为什么要打patches/ofbiz/startup-with-webapp-context.xml.patch补丁**
 
-如你所知，当把kie-drools-wb或kie-server部署到Tomcat下时，META-INF/context.xml会生效。在OFBiz 17.12.03，它没有生效。通过打 patches/ofbiz/startup-with-webapp-context.xml.patch补丁，META-INF/context.xml才会生效，然后认证和JSP标签才能起作用:
+如你所知，当把kie-drools-wb或kie-server部署到Tomcat下时，META-INF/context.xml会生效。在OFBiz 18.12，它没有生效。通过打 patches/ofbiz/startup-with-webapp-context.xml.patch补丁，META-INF/context.xml才会生效，然后认证和JSP标签才能起作用:
 
 ```java
          StandardContext context = new StandardContext();
@@ -315,13 +315,13 @@ Common class loader classes (described above)
 
 如果你的OFBiz是加载类型一，不需要使用这个补丁，因为src/main/java/org/kie/server/services/impl/controller/DefaultRestControllerImpl.java编译后会被部署到/WEB-INF/classes，这个类会生效。
 
-如果你的OFBiz是加载类型二，这也是我下载的OFBiz 17.12.03的类型，这个补丁打到[droolsjbpm-integration/kie-server-parent/kie-server-services/kie-server-services-common](https://github.com/kiegroup/droolsjbpm-integration/tree/7.17.0.Final/kie-server-parent/kie-server-services/kie-server-services-common)。lib/kie-server-services-common-7.17.0.Final.jar是打了这个补丁的jar，直接使用即可。
+如果你的OFBiz是加载类型二，这也是我下载的OFBiz 18.12的类型，这个补丁打到[droolsjbpm-integration/kie-server-parent/kie-server-services/kie-server-services-common](https://github.com/kiegroup/droolsjbpm-integration/tree/7.17.0.Final/kie-server-parent/kie-server-services/kie-server-services-common)。lib/kie-server-services-common-7.17.0.Final.jar是打了这个补丁的jar，直接使用即可。
 
 <br/>
 
-**8. 为什么使用Gradle 5.6**
+**8. Gradle 5.0**
 
-gradle/wrapper/gradle-wrapper.properties中的Gradle版本是3.2.1，它无法正确生成ofbiz.jar中的MANIFEST.MF的Class-Path，在这里，主要是不能正确解决Lucene版本。我们知道，OFBiz启动时，使用这个Class-Path作为classpath。我偶然把3.2.1改成了5.6，就可以了。我猜很多比3.2.1高的版本都可以，但是我没有试。
+gradle/wrapper/gradle-wrapper.properties中的Gradle版本是5.0，在我的环境下，可以正确执行。如果在你的环境下不行，可以尝试使用Gradle 5.6。判断是否正确的标准，是看它能否正确生成ofbiz.jar中的MANIFEST.MF的Class-Path，我们知道，OFBiz启动时，使用这个Class-Path作为classpath。
 
 ![MANIFEST](images/sandflower-MANIFEST-MF-17.12.03.png)
 
@@ -365,7 +365,7 @@ OFBiz build.gradle中包含了juel-impl-2.2.7.jar:
 
 **11. 别忘记匹配ofbiz-plugins中的Lucene版本**
 
-[OFBiz Lucene plugin 17.12.03](https://github.com/apache/ofbiz-plugins/blob/release17.12.03/lucene/build.gradle)中的Lucene版本是7.1.0，比Kie中的版本新。我修改了src/main/java/org/uberfire/ext/下的几个文件，来匹配这个版本变化，并使用Elasticsearch 6.1.1。
+[OFBiz Lucene plugin 18.12](https://github.com/apache/ofbiz-plugins/blob/release18.12/lucene/build.gradle)中的Lucene版本是7.5.0，比Kie中的版本新。我修改了src/main/java/org/uberfire/ext/下的几个文件，来匹配这个版本变化，并使用Elasticsearch 6.5.1。
 
 <br/>
 

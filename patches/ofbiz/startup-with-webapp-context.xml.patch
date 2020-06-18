@@ -1,5 +1,5 @@
 diff --git a/framework/catalina/src/main/java/org/apache/ofbiz/catalina/container/CatalinaContainer.java b/framework/catalina/src/main/java/org/apache/ofbiz/catalina/container/CatalinaContainer.java
-index d300b70..8b64183 100644
+index aa1115f..55b29e5 100644
 --- a/framework/catalina/src/main/java/org/apache/ofbiz/catalina/container/CatalinaContainer.java
 +++ b/framework/catalina/src/main/java/org/apache/ofbiz/catalina/container/CatalinaContainer.java
 @@ -20,6 +20,8 @@
@@ -11,15 +11,7 @@ index d300b70..8b64183 100644
  import java.util.ArrayList;
  import java.util.Collections;
  import java.util.HashSet;
-@@ -33,7 +35,6 @@
- 
- import javax.naming.InitialContext;
- import javax.naming.NamingException;
--
- import org.apache.catalina.Context;
- import org.apache.catalina.Engine;
- import org.apache.catalina.Globals;
-@@ -51,6 +52,7 @@
+@@ -51,6 +53,7 @@
  import org.apache.catalina.ha.tcp.ReplicationValve;
  import org.apache.catalina.ha.tcp.SimpleTcpCluster;
  import org.apache.catalina.loader.WebappLoader;
@@ -27,7 +19,7 @@ index d300b70..8b64183 100644
  import org.apache.catalina.startup.ContextConfig;
  import org.apache.catalina.startup.Tomcat;
  import org.apache.catalina.tribes.group.GroupChannel;
-@@ -68,9 +70,11 @@
+@@ -68,9 +71,11 @@
  import org.apache.ofbiz.base.container.ContainerConfig.Configuration;
  import org.apache.ofbiz.base.container.ContainerConfig.Configuration.Property;
  import org.apache.ofbiz.base.container.ContainerException;
@@ -39,7 +31,7 @@ index d300b70..8b64183 100644
  import org.apache.ofbiz.base.util.UtilValidate;
  import org.apache.ofbiz.entity.util.EntityUtilProperties;
  import org.apache.ofbiz.webapp.WebAppUtil;
-@@ -495,9 +499,26 @@
+@@ -493,9 +498,26 @@
              ComponentConfig.WebappInfo appInfo, Property clusterProp) throws ContainerException {
  
          StandardContext context = new StandardContext();

@@ -4,8 +4,8 @@ def dashbuilderVersion = '2.14.0.Final'
 def uberfireVersion = '2.14.0.Final'
 def erraiVersion = '4.4.1.Final'
 // lucene 7.1.0
-def elasticsearchVersion = '6.1.1'
-def luceneVersion = '7.1.0'
+def elasticsearchVersion = '6.5.1'
+def luceneVersion = '7.5.0'
 // for tomcat 9.0.x
 def tomcatVersion = '9.0.31'
 def resteasyVersion = '3.0.26.Final'  // cdi-api 1.2
