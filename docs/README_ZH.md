@@ -80,7 +80,7 @@ gradle ofbiz
 
 密码: ofbiz
 
-登录成功后，即可使用Drools工作台了。
+登录成功后，即可使用Kie工作台了。
 
 <br/>
 

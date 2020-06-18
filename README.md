@@ -46,7 +46,7 @@ distributionUrl=https\://services.gradle.org/distributions/gradle-5.6-bin.zip
 
 <br/>
 
-**6. Install OFBiz seed data by command: **
+**6. Install OFBiz seed data by command:**
 
 ```
 gradle loadAll
@@ -80,7 +80,7 @@ Username: admin
 
 Password: ofbiz
 
-After login successfully, you can use drools workbench now.
+After login successfully, you can use Kie workbench now.
 
 ![kie workbench](docs/images/sandflower-kie-wb-7.17.0.Final.png)
 
