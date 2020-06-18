@@ -92,7 +92,7 @@ After login successfully, you can use drools workbench now.
 
 **11. Add a kie-server named runtime/drools/ofbiz-kie-server in Deploy:**
 
-![kie controller](docs/images/sandflower-kie-wb-deploy-7.17.0.Final.png)
+![kie wb deploy](docs/images/sandflower-kie-wb-deploy-7.17.0.Final.png)
 
 <br/>
 
@@ -293,7 +293,7 @@ The ofbiz-kie-server.xml is expected to be auto-created during first startup and
 
 And ofbiz-kie-server is expected as serverId so that it can be controlled in drools workbench:
 
-![kie controller](docs/images/sandflower-kie-wb-deploy-7.17.0.Final.png)
+![kie wb deploy](docs/images/sandflower-kie-wb-deploy-7.17.0.Final.png)
 
 <br/>
 
@@ -331,7 +331,7 @@ If your OFBiz is type two and this is what I see in OFBiz 17.12.03, the patch ca
 
 The gradle version in gradle/wrapper/gradle-wrapper.properties is 3.2.1. It has a problem to download files required by drools plugin properly and build Class-Path of MANIFEST.MF for ofbiz.jar correctly. In this case, it cannot resolve lucene version as expected. As we know, OFBiz use this Class-Path as classpath when starting. I happen to change 3.2.1 to 5.6 and it's ok. I guess many other gradle versions also work fine but I didn't try.
 
-![kie controller](docs/images/sandflower-MANIFEST-MF-17.12.03.png)
+![MANIFEST](docs/images/sandflower-MANIFEST-MF-17.12.03.png)
 
 <br/>
 

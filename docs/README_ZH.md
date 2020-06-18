@@ -90,7 +90,7 @@ gradle ofbiz
 
 **11. 在Deploy中，添加一个名为runtime/drools/ofbiz-kie-server的kie-server:**
 
-![kie controller](images/sandflower-kie-wb-deploy-7.17.0.Final.png)
+![kie wb deploy](images/sandflower-kie-wb-deploy-7.17.0.Final.png)
 
 <br/>
 
@@ -289,7 +289,7 @@ rootProject.jvmArguments.add('-Dorg.kie.server.id=runtime/drools/ofbiz-kie-serve
 
 并且，ofbiz-kie-server应该是Kie服务器ID，这样才能在Drools工作台中控制它:
 
-![kie controller](images/sandflower-kie-wb-deploy-7.17.0.Final.png)
+![kie wb deploy](images/sandflower-kie-wb-deploy-7.17.0.Final.png)
 
 上面这个场景就是创建这个补丁的原因。
 
@@ -323,7 +323,7 @@ Common class loader classes (described above)
 
 gradle/wrapper/gradle-wrapper.properties中的Gradle版本是3.2.1，它无法正确生成ofbiz.jar中的MANIFEST.MF的Class-Path，在这里，主要是不能正确解决Lucene版本。我们知道，OFBiz启动时，使用这个Class-Path作为classpath。我偶然把3.2.1改成了5.6，就可以了。我猜很多比3.2.1高的版本都可以，但是我没有试。
 
-![kie controller](images/sandflower-MANIFEST-MF-17.12.03.png)
+![MANIFEST](images/sandflower-MANIFEST-MF-17.12.03.png)
 
 <br/>
 
