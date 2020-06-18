@@ -253,7 +253,7 @@ The patches/ofbiz/cookie-name-slash.patch is to fix an error message on the auto
 
 **6. Why apply patches/kie/kie-wb-common-examples-screen-backend-7.17.0.Final.patch**
 
-This patch is for [kie-wb-common-examples-screen-backend](https://github.com/kiegroup/kie-wb-common/tree/7.17.0.Final/kie-wb-common-screens/kie-wb-common-examples-screen/kie-wb-common-examples-screen-backend). A new system property org.kie.wb.common.examples.dir is added and has privilege to user.dir property. This is a minor change you can ignore and use user.dir directly.
+This patch is for [kie-wb-common-examples-screen-backend](https://github.com/kiegroup/kie-wb-common/tree/7.17.0.Final/kie-wb-common-screens/kie-wb-common-examples-screen/kie-wb-common-examples-screen-backend). A new system property org.kie.wb.common.examples.dir is added and has privilege to user.dir property. This is a minor change you can ignore and use user.dir directly. If this patch is applied, a new kie-wb-common-examples-screen-backend-7.17.0.Final.jar will be built and deployed to webapp/business-central-7.17.0.Final/WEB-INF/lib/.
 
 The code changed is:
 

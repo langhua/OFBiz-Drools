@@ -251,7 +251,7 @@ rootProject.jvmArguments.add('-Dorg.uberfire.nio.git.dir=runtime/drools')
 
 **6. 为什么打patches/kie/kie-wb-common-examples-screen-backend-7.17.0.Final.patch补丁**
 
-这个补丁用于[kie-wb-common-examples-screen-backend](https://github.com/kiegroup/kie-wb-common/tree/7.17.0.Final/kie-wb-common-screens/kie-wb-common-examples-screen/kie-wb-common-examples-screen-backend)，添加了一个新的系统属性org.kie.wb.common.examples.dir，它优先于user.dir属性。这是一个不重要的修改，你可以直接使用user.dir。
+这个补丁用于[kie-wb-common-examples-screen-backend](https://github.com/kiegroup/kie-wb-common/tree/7.17.0.Final/kie-wb-common-screens/kie-wb-common-examples-screen/kie-wb-common-examples-screen-backend)，添加了一个新的系统属性org.kie.wb.common.examples.dir，它优先于user.dir属性。这是一个不重要的修改，你可以直接使用user.dir。如果使用这个补丁，会生成一个新的kie-wb-common-examples-screen-backend-7.17.0.Final.jar，并把它部署到webapp/business-central-7.17.0.Final/WEB-INF/lib/下。
 
 代码修改是:
 
