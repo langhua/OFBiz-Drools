@@ -94,76 +94,136 @@ rootProject.jvmArguments.add('-Dorg.kie.server.controller.pwd=sandflower')
 rootProject.buildscript.repositories.maven({ url "https://repository.mulesoft.org/nexus/content/repositories/public/" })
 
 dependencies {
-    pluginLibsCompile 'org.jbpm:jbpm-kie-services:' + droolsVersion
-    pluginLibsCompile 'org.jbpm:jbpm-runtime-manager:' + droolsVersion
-    pluginLibsRuntime 'org.jbpm:jbpm-bpmn2-emfextmodel:' + droolsVersion
-    pluginLibsCompileOnly 'org.jbpm:jbpm-wb-dashboard-client:' + droolsVersion
-    pluginLibsRuntime 'org.jbpm:jbpm-workitems-bpmn2:' + droolsVersion
-    pluginLibsRuntime 'org.jbpm:jbpm-workitems-email:' + droolsVersion
-    pluginLibsRuntime 'org.jbpm:jbpm-workitems-jms:' + droolsVersion
-    pluginLibsRuntime 'org.jbpm:jbpm-workitems-rest:' + droolsVersion
-    pluginLibsRuntime 'org.jbpm:jbpm-workitems-webservice:' + droolsVersion
-    pluginLibsRuntime 'org.jbpm:jbpm-case-mgmt-impl:' + droolsVersion
-    pluginLibsRuntime 'org.jbpm:jbpm-query-jpa:' + droolsVersion
-    pluginLibsRuntime 'org.jbpm:jbpm-executor:' + droolsVersion
-    
-    pluginLibsRuntime 'org.drools:drools-decisiontables:' + droolsVersion
-    pluginLibsRuntime 'org.drools:drools-scorecards:' + droolsVersion
-    pluginLibsRuntime 'org.drools:drools-workbench-models-test-scenarios:' + droolsVersion
-    pluginLibsRuntime 'org.drools:drools-workbench-models-guided-scorecard:' + droolsVersion
-    pluginLibsRuntime 'org.drools:drools-workbench-models-guided-dtable:' + droolsVersion
-    pluginLibsRuntime 'org.drools:drools-workbench-models-guided-dtree:' + droolsVersion
-    pluginLibsRuntime 'org.drools:drools-workbench-models-guided-template:' + droolsVersion
-    pluginLibsRuntime 'org.drools:jbpm-simulation:' + droolsVersion
-    
-    pluginLibsRuntime 'org.kie:kie-dmn-validation:' + droolsVersion
-    pluginLibsRuntime 'org.kie:jbpm-process-svg:' + droolsVersion
-    pluginLibsCompile 'org.kie.server:kie-server-client:' + droolsVersion
-    pluginLibsCompile 'org.kie.server:kie-server-services-common:' + droolsVersion
-    
-    pluginLibsRuntime 'org.kie.server:kie-server-rest-common:' + droolsVersion
-    pluginLibsRuntime 'org.kie.server:kie-server-rest-case-mgmt:' + droolsVersion
-    pluginLibsRuntime 'org.kie.server:kie-server-rest-dmn:' + droolsVersion
-    pluginLibsRuntime 'org.kie.server:kie-server-rest-drools:' + droolsVersion
-    pluginLibsRuntime 'org.kie.server:kie-server-rest-jbpm:' + droolsVersion
-    pluginLibsRuntime 'org.kie.server:kie-server-rest-jbpm-ui:' + droolsVersion
-    pluginLibsRuntime 'org.kie.server:kie-server-rest-optaplanner:' + droolsVersion
-    pluginLibsRuntime 'org.kie.server:kie-server-rest-swagger:' + droolsVersion
-    pluginLibsRuntime 'org.kie.server:kie-server-router-client:' + droolsVersion
-    
-    pluginLibsRuntime 'org.kie.soup:kie-soup-dataset-csv:' + droolsVersion
-    pluginLibsRuntime 'org.kie.soup:kie-soup-dataset-elasticsearch:' + droolsVersion
-    pluginLibsRuntime 'org.kie.uberfire:i18n-taglib:' + droolsVersion
-    pluginLibsRuntime 'org.kie.server:kie-server-controller-api:' + droolsVersion
-    pluginLibsRuntime 'org.kie.server:kie-server-controller-websocket-common:' + droolsVersion
-    pluginLibsRuntime 'org.kie.server:kie-server-controller-websocket-client:' + droolsVersion
-	
-    pluginLibsRuntime 'org.optaplanner:optaplanner-persistence-jaxb:' + droolsVersion
-    pluginLibsRuntime 'org.optaplanner:optaplanner-workbench-models-datamodel-api:' + droolsVersion
+    pluginLibsCompileOnly 'org.jbpm:jbpm-wb-dashboard-client:' + droolsVersion,
+	                      'org.jboss.errai:errai-security-server:' + erraiVersion,
+						  'org.uberfire:uberfire-security-management-api:' + uberfireVersion,
+						  'org.uberfire:uberfire-security-management-backend:' + uberfireVersion,
+						  'org.uberfire:uberfire-commons:' + uberfireVersion,
+						  'org.uberfire:uberfire-metadata-backend-lucene:' + uberfireVersion,
+						  'org.uberfire:uberfire-metadata-backend-elasticsearch:' + uberfireVersion,
+						  'org.uberfire:uberfire-metadata-commons-io:' + uberfireVersion,
+                          'org.uberfire:uberfire-rest-backend:' + uberfireVersion,
+						  'org.uberfire:uberfire-rest-client:' + uberfireVersion,
+						  'org.uberfire:uberfire-nio2-jgit:' + uberfireVersion,
+						  'com.google.gwt:gwt-user:2.8.2'
 
-    pluginLibsCompileOnly 'org.jboss.errai:errai-security-server:' + erraiVersion
-    pluginLibsCompileOnly 'org.uberfire:uberfire-security-management-api:' + uberfireVersion
-    pluginLibsCompileOnly 'org.uberfire:uberfire-security-management-backend:' + uberfireVersion
-    pluginLibsCompileOnly 'org.uberfire:uberfire-commons:' + uberfireVersion
-    pluginLibsCompileOnly 'org.uberfire:uberfire-metadata-backend-lucene:' + uberfireVersion
-    pluginLibsCompileOnly 'org.uberfire:uberfire-metadata-backend-elasticsearch:' + uberfireVersion
-    pluginLibsCompileOnly 'org.uberfire:uberfire-metadata-commons-io:' + uberfireVersion
-    pluginLibsCompileOnly 'org.uberfire:uberfire-rest-backend:' + uberfireVersion
-    pluginLibsCompileOnly 'org.uberfire:uberfire-rest-client:' + uberfireVersion
-    pluginLibsCompileOnly 'org.uberfire:uberfire-nio2-jgit:' + uberfireVersion
-    pluginLibsCompileOnly 'com.google.gwt:gwt-user:2.8.2'
+    pluginLibsCompile 'org.jbpm:jbpm-kie-services:' + droolsVersion,
+	                  'org.jbpm:jbpm-runtime-manager:' + droolsVersion,
+					  'org.kie.server:kie-server-client:' + droolsVersion,
+					  'org.kie.server:kie-server-services-common:' + droolsVersion,
+					  'org.kie:kie-tomcat-integration:' + droolsVersion,
+					  'org.apache.tomcat:tomcat-util:' + tomcatVersion,
+					  'javax.security.jacc:javax.security.jacc-api:1.5',
+					  'org.eclipse.jgit:org.eclipse.jgit:' + jgitVersion,
+					  'org.eclipse.jgit:org.eclipse.jgit.http.server:' + jgitVersion,
+					  'org.elasticsearch:elasticsearch:' + elasticsearchVersion
 
-    pluginLibsCompile 'org.kie:kie-tomcat-integration:' + droolsVersion
-    pluginLibsCompile 'org.apache.tomcat:tomcat-util:' + tomcatVersion
-    pluginLibsCompile 'javax.security.jacc:javax.security.jacc-api:1.5'
-    pluginLibsCompile 'org.eclipse.jgit:org.eclipse.jgit:' + jgitVersion
-    pluginLibsCompile 'org.eclipse.jgit:org.eclipse.jgit.http.server:' + jgitVersion
-    
-    pluginLibsCompile 'org.elasticsearch:elasticsearch:' + elasticsearchVersion
-    pluginLibsRuntime 'org.elasticsearch.client:transport:' + elasticsearchVersion
-
-    pluginLibsRuntime 'com.lmax:disruptor:3.4.2'
-    pluginLibsRuntime 'org.apache.lucene:lucene-codecs:' + luceneVersion
+    pluginLibsRuntime 'org.jbpm:jbpm-bpmn2-emfextmodel:' + droolsVersion,
+	                  'org.jbpm:jbpm-workitems-bpmn2:' + droolsVersion,
+					  'org.jbpm:jbpm-workitems-email:' + droolsVersion,
+					  'org.jbpm:jbpm-workitems-jms:' + droolsVersion,
+					  'org.jbpm:jbpm-workitems-rest:' + droolsVersion,
+					  'org.jbpm:jbpm-workitems-webservice:' + droolsVersion,
+					  'org.jbpm:jbpm-case-mgmt-impl:' + droolsVersion,
+					  'org.jbpm:jbpm-query-jpa:' + droolsVersion,
+					  'org.jbpm:jbpm-executor:' + droolsVersion,
+					  'org.drools:drools-decisiontables:' + droolsVersion,
+					  'org.drools:drools-scorecards:' + droolsVersion,
+					  'org.drools:drools-workbench-models-test-scenarios:' + droolsVersion,
+					  'org.drools:drools-workbench-models-guided-scorecard:' + droolsVersion,
+					  'org.drools:drools-workbench-models-guided-dtable:' + droolsVersion,
+					  'org.drools:drools-workbench-models-guided-dtree:' + droolsVersion,
+					  'org.drools:drools-workbench-models-guided-template:' + droolsVersion,
+					  'org.drools:jbpm-simulation:' + droolsVersion,
+					  'org.kie:kie-dmn-validation:' + droolsVersion,
+					  'org.kie:jbpm-process-svg:' + droolsVersion,
+					  'org.kie.server:kie-server-rest-common:' + droolsVersion,
+					  'org.kie.server:kie-server-rest-case-mgmt:' + droolsVersion,
+					  'org.kie.server:kie-server-rest-dmn:' + droolsVersion,
+					  'org.kie.server:kie-server-rest-drools:' + droolsVersion,
+					  'org.kie.server:kie-server-rest-jbpm:' + droolsVersion,
+					  'org.kie.server:kie-server-rest-jbpm-ui:' + droolsVersion,
+					  'org.kie.server:kie-server-rest-optaplanner:' + droolsVersion,
+					  'org.kie.server:kie-server-rest-swagger:' + droolsVersion,
+					  'org.kie.server:kie-server-router-client:' + droolsVersion,
+					  'org.kie.soup:kie-soup-dataset-csv:' + droolsVersion,
+					  'org.kie.soup:kie-soup-dataset-elasticsearch:' + droolsVersion,
+					  'org.kie.uberfire:i18n-taglib:' + droolsVersion,
+					  'org.kie.server:kie-server-controller-api:' + droolsVersion,
+					  'org.kie.server:kie-server-controller-websocket-common:' + droolsVersion,
+					  'org.kie.server:kie-server-controller-websocket-client:' + droolsVersion,
+					  'org.optaplanner:optaplanner-persistence-jaxb:' + droolsVersion,
+					  'org.optaplanner:optaplanner-workbench-models-datamodel-api:' + droolsVersion,
+					  'org.elasticsearch.client:transport:' + elasticsearchVersion,
+					  'com.lmax:disruptor:3.4.2',
+					  'org.apache.lucene:lucene-codecs:' + luceneVersion,
+					  'org.apache.httpcomponents:httpcore-nio:4.4.5',
+					  'com.google.guava:guava-gwt:20.0',
+					  'org.apache.xmlgraphics:batik-codec:1.9.1',
+					  'javax.activation:activation:1.1.1',
+					  'net.bytebuddy:byte-buddy:1.8.17',
+					  'com.google.elemental2:elemental2-dom:1.0.0-RC1',
+					  'org.owasp.encoder:encoder:1.2',
+					  'com.google.inject:guice:4.0:no_aop',
+					  'com.google.inject.extensions:guice-servlet:4.0',
+					  'org.hibernate:hibernate-envers:5.1.15.Final',
+					  'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final',
+					  'org.hibernate:hibernate-validator:4.1.0.Final',
+					  'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:' + jacksonVersion,
+					  'org.codehaus.jackson:jackson-core-asl:' + codehausJacksonVersion,
+					  'org.codehaus.jackson:jackson-mapper-asl:' + codehausJacksonVersion,
+					  'org.codehaus.jackson:jackson-jaxrs:' + codehausJacksonVersion,
+					  'org.codehaus.jackson:jackson-xc:' + codehausJacksonVersion,
+					  'org.jdom:jdom:1.1.3',
+					  'org.jgroups:jgroups:3.6.14.Final',
+					  'joda-time:joda-time:2.9.7',
+					  'org.json:json:20090211',
+					  'org.apache.maven:maven-embedder:3.3.9',
+					  'org.eclipse:org.eclipse.bpmn2:0.8.2-jboss',
+					  'org.jasypt:jasypt:1.9.2',
+					  'org.jboss.classfilewriter:jboss-classfilewriter:1.2.1.Final',
+					  'org.jboss.spec.javax.ejb:jboss-ejb-api_3.2_spec:1.0.0.Final',
+					  'org.jboss.spec.javax.interceptor:jboss-interceptors-api_1.2_spec:1.0.0.Final',
+					  'org.jboss.spec.javax.xml.ws:jboss-jaxws-api_2.2_spec:2.0.4.Final',
+					  'org.jboss.resteasy:resteasy-jaxrs:' + resteasyVersion,
+					  'org.jboss.resteasy:resteasy-jackson-provider:' + resteasyVersion,
+					  'org.jboss.resteasy:resteasy-jaxb-provider:' + resteasyVersion,
+					  'org.apache.johnzon:johnzon-core:0.9.5',
+					  'org.jboss.forge.roaster:roaster-jdt:2.19.5.Final',
+					  'org.apache.mina:mina-core:2.0.15',
+					  'io.netty:netty-transport-native-epoll:4.1.16.Final:linux-x86_64',
+					  'io.netty:netty-transport-native-kqueue:4.1.16.Final:osx-x86_64',
+					  'org.osgi:org.osgi.compendium:4.3.1',
+					  'org.osgi:org.osgi.core:4.3.1',
+					  'org.ocpsoft.prettytime:prettytime:3.0.2.Final',
+					  'org.infinispan.protostream:protostream:4.2.2.Final',
+					  'org.yaml:snakeyaml:1.17',
+					  'com.unboundid:unboundid-ldapsdk:3.2.0',
+					  'org.apache.velocity:velocity:1.7',
+					  'org.wildfly.security:wildfly-elytron:1.1.0.Final',
+					  'org.apache.abdera:abdera-core:1.1.3',
+					  'ch.qos.cal10n:cal10n-api:0.8.1',
+					  'com.h2database:h2:1.3.173',
+					  'org.jboss.errai.reflections:reflections:4.3.2.Final',
+					  'org.scannotation:scannotation:1.0.3',
+					  'org.slf4j:slf4j-ext:1.7.25',
+					  'org.apache.sshd:sshd-core:1.6.0',
+					  'xerces:xercesImpl:2.11.0.SP5',
+					  'xml-apis:xml-apis:1.4.01',
+					  'javax.json:javax.json-api:1.1.4',
+					  'cglib:cglib-nodep:2.2',
+					  'stax:stax:1.2.0',
+					  'io.swagger:swagger-jaxrs:1.5.15',
+					  'org.codehaus.janino:janino:2.5.15',
+					  'org.jboss.narayana.tomcat:tomcat-jta:5.6.4.Final',
+					  'org.javassist:javassist:' + javassistVersion,
+					  'javax.websocket:javax.websocket-api:1.1',
+					  'de.benediktmeurer.gwt-slf4j:gwt-slf4j:0.0.2',
+					  'org.kie.server:kie-server-services-openshift:' + droolsVersion,
+					  'org.infinispan:infinispan-client-hotrod:' + infinispanVersion,
+					  'org.infinispan:infinispan-query-dsl:' + infinispanVersion,
+					  'org.infinispan:infinispan-remote-query-client:' + infinispanVersion
+					  
     pluginLibsRuntime ('com.sun.xml.bind:jaxb-core:2.3.0') {
         force true
     }
@@ -173,44 +233,6 @@ dependencies {
     pluginLibsRuntime ('com.sun.xml.bind:jaxb-xjc:2.3.0') {
         force true
     }
-    
-    pluginLibsRuntime 'org.apache.httpcomponents:httpcore-nio:4.4.5'
-    pluginLibsRuntime 'com.google.guava:guava-gwt:20.0'
-    pluginLibsRuntime 'org.apache.xmlgraphics:batik-codec:1.9.1'
-    pluginLibsRuntime 'javax.activation:activation:1.1.1'
-    pluginLibsRuntime 'net.bytebuddy:byte-buddy:1.8.17'
-    
-    pluginLibsRuntime 'com.google.elemental2:elemental2-dom:1.0.0-RC1'
-    
-    pluginLibsRuntime 'org.owasp.encoder:encoder:1.2'
-    pluginLibsRuntime 'com.google.inject:guice:4.0:no_aop'
-    pluginLibsRuntime 'com.google.inject.extensions:guice-servlet:4.0'
-    pluginLibsRuntime 'org.hibernate:hibernate-envers:5.1.15.Final'
-    pluginLibsRuntime 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final'
-    pluginLibsRuntime 'org.hibernate:hibernate-validator:4.1.0.Final'
-    
-    pluginLibsRuntime 'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:' + jacksonVersion
-    
-    pluginLibsRuntime 'org.codehaus.jackson:jackson-core-asl:' + codehausJacksonVersion
-    pluginLibsRuntime 'org.codehaus.jackson:jackson-mapper-asl:' + codehausJacksonVersion
-    pluginLibsRuntime 'org.codehaus.jackson:jackson-jaxrs:' + codehausJacksonVersion
-    pluginLibsRuntime 'org.codehaus.jackson:jackson-xc:' + codehausJacksonVersion
-    
-    pluginLibsRuntime 'org.jdom:jdom:1.1.3'
-    pluginLibsRuntime 'org.jgroups:jgroups:3.6.14.Final'
-    pluginLibsRuntime 'joda-time:joda-time:2.9.7'
-    pluginLibsRuntime 'org.json:json:20090211'
-
-    pluginLibsRuntime 'org.apache.maven:maven-embedder:3.3.9'
-    
-    pluginLibsRuntime 'org.eclipse:org.eclipse.bpmn2:0.8.2-jboss'
-    
-    pluginLibsRuntime 'org.jasypt:jasypt:1.9.2'
-    
-    pluginLibsRuntime 'org.jboss.classfilewriter:jboss-classfilewriter:1.2.1.Final'
-    pluginLibsRuntime 'org.jboss.spec.javax.ejb:jboss-ejb-api_3.2_spec:1.0.0.Final'
-    pluginLibsRuntime 'org.jboss.spec.javax.interceptor:jboss-interceptors-api_1.2_spec:1.0.0.Final'
-    pluginLibsRuntime 'org.jboss.spec.javax.xml.ws:jboss-jaxws-api_2.2_spec:2.0.4.Final'
     pluginLibsRuntime ('org.jboss.spec.javax.servlet.jstl:jboss-jstl-api_1.2_spec:1.1.3.Final') {
         exclude group: 'org.jboss.spec.javax.el'
         exclude group: 'org.jboss.spec.javax.servlet'
@@ -219,60 +241,7 @@ dependencies {
         force true
     }
     
-    pluginLibsRuntime 'org.jboss.resteasy:resteasy-jaxrs:' + resteasyVersion
-    pluginLibsRuntime 'org.jboss.resteasy:resteasy-jackson-provider:' + resteasyVersion
-    pluginLibsRuntime 'org.jboss.resteasy:resteasy-jaxb-provider:' + resteasyVersion
-    
-    pluginLibsRuntime 'org.apache.johnzon:johnzon-core:0.9.5'
-    pluginLibsRuntime 'org.jboss.forge.roaster:roaster-jdt:2.19.5.Final'
-    
-    pluginLibsRuntime 'org.apache.mina:mina-core:2.0.15'
-    pluginLibsRuntime 'io.netty:netty-transport-native-epoll:4.1.16.Final:linux-x86_64'
-    pluginLibsRuntime 'io.netty:netty-transport-native-kqueue:4.1.16.Final:osx-x86_64'
-    
-    pluginLibsRuntime 'org.osgi:org.osgi.compendium:4.3.1'
-    pluginLibsRuntime 'org.osgi:org.osgi.core:4.3.1'
-    
-    pluginLibsRuntime 'org.ocpsoft.prettytime:prettytime:3.0.2.Final'
-    pluginLibsRuntime 'org.infinispan.protostream:protostream:4.2.2.Final'
-    pluginLibsRuntime 'org.yaml:snakeyaml:1.17'
-    
-    pluginLibsRuntime 'com.unboundid:unboundid-ldapsdk:3.2.0'
-    pluginLibsRuntime 'org.apache.velocity:velocity:1.7'
-    
-    pluginLibsRuntime 'org.wildfly.security:wildfly-elytron:1.1.0.Final'
-    pluginLibsRuntime 'org.apache.abdera:abdera-core:1.1.3'
-    pluginLibsRuntime 'ch.qos.cal10n:cal10n-api:0.8.1'
-    pluginLibsRuntime 'com.h2database:h2:1.3.173'
-    
-    pluginLibsRuntime 'org.jboss.errai.reflections:reflections:4.3.2.Final'
-    pluginLibsRuntime 'org.scannotation:scannotation:1.0.3'
-    
-    pluginLibsRuntime 'org.slf4j:slf4j-ext:1.7.25'
-    pluginLibsRuntime 'org.apache.sshd:sshd-core:1.6.0'
-    pluginLibsRuntime 'xerces:xercesImpl:2.11.0.SP5'
-    pluginLibsRuntime 'xml-apis:xml-apis:1.4.01'
-    
-    pluginLibsRuntime 'javax.json:javax.json-api:1.1.4'
-    pluginLibsRuntime 'cglib:cglib-nodep:2.2'
-    pluginLibsRuntime 'stax:stax:1.2.0'
-    
-    pluginLibsRuntime 'io.swagger:swagger-jaxrs:1.5.15'
-    
-    pluginLibsRuntime 'org.codehaus.janino:janino:2.5.15'
-    pluginLibsRuntime 'org.jboss.narayana.tomcat:tomcat-jta:5.6.4.Final'
-    
-    pluginLibsRuntime 'org.javassist:javassist:' + javassistVersion
-    
-    pluginLibsRuntime 'javax.websocket:javax.websocket-api:1.1'
-    pluginLibsRuntime 'de.benediktmeurer.gwt-slf4j:gwt-slf4j:0.0.2'
-
 //    pluginLibsRuntime 'org.keycloak:keycloak-core:4.8.3.Final'
-    
-    pluginLibsRuntime 'org.kie.server:kie-server-services-openshift:' + droolsVersion
-    pluginLibsRuntime 'org.infinispan:infinispan-client-hotrod:' + infinispanVersion
-    pluginLibsRuntime 'org.infinispan:infinispan-query-dsl:' + infinispanVersion
-    pluginLibsRuntime 'org.infinispan:infinispan-remote-query-client:' + infinispanVersion
 }
 
 buildDir = '../../build'
